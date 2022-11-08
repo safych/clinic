@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clinic</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+  <header>
+    <div class="index_header">
+        <div class="right_header">
+          <% if patient_signed_in? %>
+            <%= link_to 'Вийти', destroy_patient_session_path, method: :delete %>
+            <div>
+              <p>Name <%= current_patient.name %></p>
+            </div>
+          <% else %>
+            <%= link_to 'Вхід', new_patient_session_path %>
+          <% end %>
+        </div>
+    </div>
+  </header>
+    <%= render 'layouts/flash_message' %>
+    <%= yield %>
+  </body>
+</html>

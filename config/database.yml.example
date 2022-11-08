@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: user
+  password: password
+
+development:
+  <<: *default
+  database: clinic_development
+
+test:
+  <<: *default
+  database: clinic_test
+
+production:
+  <<: *default
+  database: clinic_production
+  username: clinic
+  password: <%= ENV["CLINIC_DATABASE_PASSWORD"] %>
