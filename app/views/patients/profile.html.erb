@@ -1,0 +1,52 @@
+<div style="margin-top: -2.5%; margin-left: 1%">
+  <h1>Patient info:</h1>
+  <ul>
+    <li>Name: <%= current_patient.name %></li>
+    <li>Surname: <%= current_patient.surname %></li>
+    <li>Age: <%= current_patient.age %></li>
+    <li>Phone: <%= current_patient.phone %></li>
+    <li>Gender: <%= current_patient.gender %></li>
+    <li>Residence: <%= current_patient.residence %></li>
+  </ul>
+  <h2>Change password:</h2>
+  <%= link_to "Change your password", edit_patient_registration_path %>
+  <h2>Change data patient:</h2>
+  <%= form_with url: "/patients/#{current_patient.id}", method: :put do |f| %>
+    <div class="field">
+      <%= f.label :phone %><br />
+      <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", placeholder: "+380*********" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :surname %><br />
+      <%= f.text_field :surname, autofocus: true, autocomplete: "surname" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :age %><br />
+      <%= f.number_field :age, autofocus: true, autocomplete: "age" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :gender %><br />
+      <%= radio_button_tag(:gender, "man") %>
+        <%= label_tag(:gender_man, "I'm a man") %>
+      <%= radio_button_tag(:gender, "women") %>
+        <%= label_tag(:gender_women, "I'm a women") %>
+    </div>
+
+    <div class="field">
+      <%= f.label :residence %><br />
+      <%= f.text_field :residence, autofocus: true, autocomplete: "residence" %>
+    </div>
+
+    <div style="margin-top: .5%">
+      <%= f.submit "Update" %>
+    </div>
+  <% end %>
+</div>

@@ -12,18 +12,22 @@
 
   <body>
   <header>
-    <div class="index_header">
-        <div class="right_header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Polyclinic</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
           <% if patient_signed_in? %>
-            <%= link_to 'Вийти', destroy_patient_session_path, method: :delete %>
-            <div>
-              <p>Name <%= current_patient.name %></p>
-            </div>
+            <%= link_to 'Profile', profile_patient_path, class: "nav-item nav-link active" %>
+            <%= link_to 'Вийти', destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% else %>
-            <%= link_to 'Вхід', new_patient_session_path %>
+            <%= link_to 'Вхід', new_patient_session_path, class: "nav-item nav-link active" %>
           <% end %>
         </div>
-    </div>
+      </div>
+    </nav>
   </header>
     <%= render 'layouts/flash_message' %>
     <%= yield %>
