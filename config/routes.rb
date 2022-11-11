@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :doctors, :skip => [:registrations]
   devise_scope :patients do
     get "/doctors", to: "doctors#index"
