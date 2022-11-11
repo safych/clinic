@@ -6,7 +6,10 @@ class Patient < ApplicationRecord
 
   has_many :appointments
   
-  validates :phone, uniqueness: true
+  validates_length_of :name, minimum: 2, allow_blank: true
+  validates_length_of :surname, minimum: 2, allow_blank: true
+  validates_length_of :residence, minimum: 8, maximum: 30, allow_blank: true
+  validates :phone, uniqueness: true, length: {is: 13}, allow_blank: true
 
   def email_required?
     false

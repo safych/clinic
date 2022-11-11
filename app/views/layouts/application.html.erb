@@ -20,16 +20,19 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <% if patient_signed_in? %>
-            <%= link_to 'Profile', profile_patient_path, class: "nav-item nav-link active" %>
-            <%= link_to 'Вийти', destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
+            <%= link_to "Profile", profile_patient_path, class: "nav-item nav-link active" %>
+            <%= link_to "Doctors", doctors_path, class: "nav-item nav-link active" %>
+            <%= link_to "My appointments", appointments_path, class: "nav-item nav-link active" %>
+            <%= link_to "Вийти", destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% else %>
-            <%= link_to 'Вхід', new_patient_session_path, class: "nav-item nav-link active" %>
+            <%= link_to "Doctors", doctors_path, class: "nav-item nav-link active" %>
+            <%= link_to "Вхід", new_patient_session_path, class: "nav-item nav-link active" %>
           <% end %>
         </div>
       </div>
     </nav>
   </header>
-    <%= render 'layouts/flash_message' %>
+    <%= render "layouts/flash_message" %>
     <%= yield %>
   </body>
 </html>

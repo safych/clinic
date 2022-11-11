@@ -1,14 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<div style="margin-top: -3%; margin-left: 1%">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Appointments</h1>
+  <h1>Appointments</h1>
 
-<div id="appointments">
-  <% @appointments.each do |appointment| %>
-    <%= render appointment %>
-    <p>
-      <%= link_to "Show this appointment", appointment %>
-    </p>
-  <% end %>
+  <div id="appointments">
+    <% if !@appointments.nil? %>
+      <% @appointments.each do |appointment| %>
+        <% if appointment.patient_id.eql? current_patient.id %>
+          <%= render appointment %>
+          <p>
+            <%= link_to "Show this appointment", appointment %>
+          </p>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>Not found appointments</p>
+    <% end %>
+  </div>
+
+  <%= link_to "New appointment", new_appointment_path %>
 </div>
-
-<%= link_to "New appointment", new_appointment_path %>
