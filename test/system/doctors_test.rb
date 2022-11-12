@@ -14,6 +14,7 @@ class DoctorsTest < ApplicationSystemTestCase
     visit doctors_url
     click_on "New doctor"
 
+    fill_in "Category", with: @appointment.category_id
     fill_in "Name", with: @doctor.name
     fill_in "Password", with: @doctor.password
     fill_in "Phone", with: @doctor.phone
@@ -28,6 +29,7 @@ class DoctorsTest < ApplicationSystemTestCase
     visit doctor_url(@doctor)
     click_on "Edit this doctor", match: :first
 
+    fill_in "Category", with: @appointment.category_id
     fill_in "Name", with: @doctor.name
     fill_in "Password", with: @doctor.password
     fill_in "Phone", with: @doctor.phone

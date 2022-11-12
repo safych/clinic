@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :doctors, :skip => [:registrations]
-  devise_scope :patients do
+  devise_scope :doctors do
     get "/doctors", to: "doctors#index"
   end
   devise_for :patients, controllers: { registrations: "patients/registrations", sessions: "patients/sessions" }

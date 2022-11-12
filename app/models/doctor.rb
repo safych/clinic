@@ -5,7 +5,7 @@ class Doctor < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :appointments
-  has_many :categories
+  belongs_to :category
 
   validates_length_of :name, minimum: 2, allow_blank: true
   validates_length_of :surname, minimum: 2, allow_blank: true

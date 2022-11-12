@@ -4,6 +4,7 @@ class DeviseCreateDoctors < ActiveRecord::Migration[7.0]
   def change
     create_table :doctors do |t|
       ## Database authenticatable
+      t.references :category, null: false, foreign_key: true
       t.string :email,              null: false, default: ""
       t.string :phone,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -36,10 +37,10 @@ class DeviseCreateDoctors < ActiveRecord::Migration[7.0]
       # t.datetime :locked_at
 
 
-      t.timestamps null: false
+      t.timestamps
     end
 
-    add_index :doctors, :reset_password_token, unique: true
+    # add_index :doctors, :reset_password_token, unique: true
     # add_index :doctors, :confirmation_token,   unique: true
     # add_index :doctors, :unlock_token,         unique: true
   end
