@@ -1,17 +1,17 @@
 <div id="<%= dom_id appointment %>">
   <p>
     <strong>Doctor:</strong>
-    <%= appointment.doctor_id %>
+    <%= "#{appointment.doctor.surname} #{appointment.doctor.name} #{appointment.doctor.category.title}" %>
   </p>
 
   <p>
     <strong>Patient:</strong>
-    <%= appointment.patient_id %>
+    <%= "#{appointment.patient.surname} #{appointment.patient.name}" %>
   </p>
 
   <p>
-    <strong>Status:</strong>
-    <%= appointment.status %>
+    <strong>Date:</strong>
+    <%= appointment.date %>
   </p>
 
   <p>

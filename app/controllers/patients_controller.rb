@@ -4,7 +4,8 @@ class PatientsController < ApplicationController
 
   def update
     if @patient.update(patient_params)
-      head :ok
+      redirect_to profile_patient_path
+      return
     else
       head :unprocessable_entity
     end

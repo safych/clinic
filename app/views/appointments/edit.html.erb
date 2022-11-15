@@ -1,10 +1,37 @@
-<h1>Editing appointment</h1>
+<div style="margin-top: -3%; margin-left: 1%">
+  <h1>Add recommendation appointment</h1>
 
-<%= render "form", appointment: @appointment %>
+  <%= form_with url: "/update/appointments", method: :put do |form| %>
+    <% if @appointment.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
 
-<br>
+        <ul>
+          <% appointment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<div>
-  <%= link_to "Show this appointment", @appointment %> |
-  <%= link_to "Back to appointments", appointments_path %>
+    <div>
+      <%= form.label :recommendation, style: "display: block" %>
+      <%= form.text_area :recommendation %>
+    </div>
+
+    <div>
+      <%= form.hidden_field :id, :value => current_doctor.id %>
+    </div>
+
+    <div>
+      <%= form.submit "Add recomendation" %>
+    </div>
+  <% end %>
+
+  <br>
+
+  <div>
+    <%= link_to "Show this appointment", @appointment %> |
+    <%= link_to "Back to appointments", appointments_path %>
+  </div>
 </div>

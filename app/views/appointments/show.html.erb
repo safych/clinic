@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<div style="margin-top: -3%; margin-left: 1%">
+  <p style="color: green"><%= notice %></p>
 
-<%= render @appointment %>
+  <%= render @appointment %>
 
-<div>
-  <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> |
-  <%= link_to "Back to appointments", appointments_path %>
+  <div>
+    <% if doctor_signed_in? %>
+      <%= link_to "Add recommendation", edit_appointment_path(@appointment) %> |
+    <% end %>
+    <%= link_to "Back to appointments", appointments_path %>
 
-  <%= button_to "Destroy this appointment", @appointment, method: :delete %>
+    <%= button_to "Destroy this appointment", @appointment, method: :delete %>
+  </div>
 </div>

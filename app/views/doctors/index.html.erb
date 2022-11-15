@@ -2,17 +2,30 @@
   <p style="color: green"><%= notice %></p>
 
   <h1>Doctors</h1>
-
-  <div id="doctors">
-    <% if !@doctors.nil? %>
-      <% @doctors.each do |doctor| %>
-        <%= render doctor %>
-        <p>
-          <%= link_to "Show this doctor", doctor %>
-        </p>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Category</th>
+        <th scope="col">Phone</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if !@doctors.nil? %>
+        <% @doctors.each do |doctor| %>
+          <tr>
+            <td>#</td>
+            <td><%= doctor.name %></td>
+            <td><%= doctor.surname %></td>
+            <td><%= doctor.category.title %></td>
+            <td><%= doctor.phone %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <p>Not found doctors</p>
       <% end %>
-    <% else %>
-      <p>Not found doctors</p>
-    <% end %>
-  </div>
+      </tbody>
+  </table>
 </div>

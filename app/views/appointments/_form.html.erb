@@ -12,23 +12,22 @@
   <% end %>
 
   <div>
+    <% doctors = Doctor.all.map { |doctor| ["#{doctor.surname} #{doctor.name} #{doctor.category.title}", doctor.id] } %>
     <%= form.label :doctor_id, style: "display: block" %>
-    <%= form.text_field :doctor_id %>
+    <%= form.select :doctor_id, doctors %>
   </div>
 
   <div>
-    <%= form.label :patient_id, style: "display: block" %>
-    <%= form.text_field :patient_id %>
+     <%= form.hidden_field :patient_id, :value => current_patient.id %>
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+     <%= form.hidden_field :status, :value => "wait" %>
   </div>
 
   <div>
-    <%= form.label :recommendation, style: "display: block" %>
-    <%= form.text_area :recommendation %>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_select :date %>
   </div>
 
   <div>

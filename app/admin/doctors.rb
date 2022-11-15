@@ -10,7 +10,8 @@ ActiveAdmin.register Doctor do
     def create
       @doctor = Doctor.new(doctor_params)
       if @doctor.save!
-        head :ok
+        redirect_to admin_doctors_path
+        return
       else
         head 406
       end

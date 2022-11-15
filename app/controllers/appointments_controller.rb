@@ -22,27 +22,34 @@ class AppointmentsController < ApplicationController
   # POST /appointments or /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
-    appointments_doctor = Appointment.where(doctor_id: params[:doctor_id], date: params[:date], status: "wait")
+    verification = Appointment.find_by(patient_id: params[:appointment][:patient_id], date: @appointment.date, doctor_id: params[:appointment][:doctor_id])
     respond_to do |format|
-      if @appointment.save && appointments_doctor.length < 11
-        format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully created." }
+      if count_appointment.length < 11 && verification.nil?
+        @appointment.save
+        format.html { redirect_to appointments_path, notice: "Appointment was successfully created." }
         format.json { render :show, status: :created, location: @appointment }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, notice: "Appointment wasn't successfully created." }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /appointments/1 or /appointments/1.json
-  def update
-    appointments_doctor = Appointment.where(doctor_id: params[:doctor_id], date: params[:date], status: "wait")
+  def count_appointment
+    appointments_doctor = Appointment.find_by(doctor_id: params[:appointment][:doctor_id], date: params[:appointment][:date], status: "wait")
+    appointments_doctor if !appointments_doctor.nil?
+    [] if appointments_doctor.nil?
+  end
+
+
+  def add_recommendation
+    @appointment = Appointment.find(params[:id])
     respond_to do |format|
-      if @appointment.update(appointment_params) && appointments_doctor.length < 11
-        format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully updated." }
+      if @appointment.update(recommendation: params[:recommendation], status: "done") && params[:recommendation] != ""
+        format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully added to the recommendation." }
         format.json { render :show, status: :ok, location: @appointment }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity, notice: "Appointment wasn't successfully updated. Because recommendation empty." }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
