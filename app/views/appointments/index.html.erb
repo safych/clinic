@@ -44,18 +44,18 @@
         <tbody>
           <% @appointments.each do |appointment| %>
             <% if appointment.doctor_id.eql? current_doctor.id %>
-            <tr>
-              <td>
-                <%= "#{appointment.patient.surname} #{appointment.patient.name} #{appointment.doctor.phone}" %>
-              </td>
-              <td><%= appointment.status %></td>
-              <td><%= appointment.date %></td>
-              <td><%= link_to "Show this appointment", appointment %></td>
-            </tr>
+              <tr>
+                <td>
+                  <%= "#{appointment.patient.surname} #{appointment.patient.name} #{appointment.doctor.phone}" %>
+                </td>
+                <td><%= appointment.status %></td>
+                <td><%= appointment.date %></td>
+                <td><%= link_to "Show this appointment", appointment %></td>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
     </table>
-      <% end %>
-    <% end %>
   <% else %>
     <h1>You are not authorized!!!</h1>
   <% end %>

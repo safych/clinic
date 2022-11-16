@@ -2,25 +2,21 @@
   <h1>Add recommendation appointment</h1>
 
   <%= form_with url: "/update/appointments", method: :put do |form| %>
-    <% if @appointment.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
-
-        <ul>
-          <% appointment.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div>
+    <% invalid = @appointment.errors.include?(:recommendation) %>
+    <div class="form-group w-25 p-3">
       <%= form.label :recommendation, style: "display: block" %>
-      <%= form.text_area :recommendation %>
+      <%= form.text_area :recommendation, class: "form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <div class="invalid-feedback d-block">
+          <% quiz.errors.full_messages_for(:recommendation).each do |error_message| %>
+            <%= error_message %>.
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div>
-      <%= form.hidden_field :id, :value => current_doctor.id %>
+      <%= form.hidden_field :id, :value => @appointment.id %>
     </div>
 
     <div>
