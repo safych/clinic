@@ -1,4 +1,4 @@
-<div style="margin-top: -3%; margin-left: 1%">
+<div style="margin-left: 1%">
   <h1>Profile doctor</h1>
   <ul>
     <li>Name: <%= current_doctor.name %></li>
@@ -6,4 +6,57 @@
     <li>Phone: <%= current_doctor.phone %></li>
     <li>Category: <%= current_doctor.category.title %></li>
   </ul>
+  <h2>Change password:</h2>
+  <%= form_with url: "/edit_password/doctor/#{current_doctor.id}", method: :post do |f| %>
+    <div class="field">
+      <%= f.label :password, "New password" %><br />
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, "Confirm new password" %><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <%= f.hidden_field :token_update, :value => current_doctor.token_update %>
+    <%= f.hidden_field :id, :value => current_doctor.id %>
+
+    <div style="margin-top: .5%">
+      <%= f.submit "Update password" %>
+    </div>
+  <% end %>
+  <h2>Change data:</h2>
+  <%= form_with url: "/update/doctor/#{current_doctor.id}", method: :post do |f| %>
+    <%= f.hidden_field :token_update, :value => current_doctor.token_update %>
+    <%= f.hidden_field :id, :value => current_doctor.id %>
+
+    <div class="field">
+      <%= f.label :category_id %><br />
+      <%= f.select(:category_id, Category.all.collect { |category| [category.title, category.id] }, selected: current_doctor.category_id) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", value: current_doctor.name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :surname %><br />
+      <%= f.text_field :surname, autofocus: true, autocomplete: "surname", value: current_doctor.surname %>
+    </div>
+
+    <div class="field">
+      <%= f.label :phone %><br />
+      <%= f.text_field :phone, autofocus: true, autocomplete: "phone", value: current_doctor.phone %>
+    </div>
+
+    <div style="margin-top: .5%">
+      <%= f.submit "Update data" %>
+    </div>
+  <% end %>
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-info">
+      <%= msg %>
+    </div>
+  <% end %>
 </div>

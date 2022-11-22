@@ -5,19 +5,27 @@ ActiveAdmin.register Patient do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :phone, :encrypted_password, :name, :surname, :age, :gender, :residence, :reset_password_token, :reset_password_sent_at, :remember_created_at
-  
-  form do |f|
-    f.inputs do
-      f.input :phone
-      f.input :name
-      f.input :surname
-      f.input :age
-      f.input :gender, as: :select, collection: (["man", "women"])
-      f.input :residence
+
+  controller do
+    def update
+      patient = Patient.find(params[:id])
+      password = BCrypt::Password.create(params[:patient][:encrypted_password])
+      patient.update(name: params[:patient][:name], surname: params[:patient][:surname], phone: params[:patient][:phone],
+                     encrypted_password: password, age: params[:patient][:age], gender: params[:patient][:gender], 
+                     residence: params[:patient][:residence])
+      if patient.save!
+        redirect_to admin_patients_path
+        return
+      else
+        head 406
+      end
     end
-    f.actions
   end
+
+  permit_params :email, :phone, :encrypted_password, :token_update, :name, :surname, :age, :gender, :residence, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  
+  form partial: "form"
+
   #
   # or
   #

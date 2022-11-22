@@ -1,0 +1,11 @@
+<%= semantic_form_for [:admin, @doctor], builder: Formtastic::FormBuilder do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.inputs do %>
+    <%= f.input :category_id, as: :select, collection: Category.all %>
+    <%= f.input :name %>
+    <%= f.input :surname %>
+    <%= f.input :phone %>
+    <%= f.input :encrypted_password %>
+  <% end %>
+  <%= f.actions %>
+<% end %>

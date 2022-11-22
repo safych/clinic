@@ -34,3 +34,8 @@
     <%= form.submit %>
   </div>
 <% end %>
+<% flash.each do |type, msg| %>
+  <div class="alert alert-danger">
+    <%= msg %>
+  </div>
+<% end %>

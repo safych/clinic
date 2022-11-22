@@ -1,0 +1,13 @@
+<%= semantic_form_for [:admin, @patient], builder: Formtastic::FormBuilder do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :surname %>
+    <%= f.input :phone %>
+    <%= f.input :age, as: :number %>
+    <%= f.input :gender, as: :select, collection: (["man", "women"]) %>
+    <%= f.input :residence %>
+    <%= f.input :encrypted_password %>
+  <% end %>
+  <%= f.actions %>
+<% end %>

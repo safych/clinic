@@ -1,9 +1,9 @@
 class PatientsController < ApplicationController
-  before_action :authenticate_patient! 
-  before_action :set_patient, only: [:update]
-
   def update
-    if @patient.update(patient_params)
+    patient = Patient.find_by(id: params[:id], token_update: params[:token_update])
+    if !patient.nil?
+      patient.update(name: params[:name], surname: params[:surname], phone: params[:phone], 
+                     age: params[:age], gender: params[:gender], residence: params[:residence])
       redirect_to profile_patient_path
       return
     else
@@ -12,16 +12,5 @@ class PatientsController < ApplicationController
   end
 
   def profile
-  end
-
-
-  private
-
-  def set_patient 
-    @patient = Patient.find(params[:id])
-  end
-
-  def patient_params
-    params.permit(:name, :surname, :phone, :age, :gender, :residence)
   end
 end

@@ -1,3 +1,5 @@
+require 'securerandom'
+
 ActiveAdmin.register Doctor do
 
   # See permitted parameters documentation:
@@ -9,7 +11,21 @@ ActiveAdmin.register Doctor do
   controller do
     def create
       @doctor = Doctor.new(doctor_params)
+      @doctor.token_update = SecureRandom.hex(6)
       if @doctor.save!
+        redirect_to admin_doctors_path
+        return
+      else
+        head 406
+      end
+    end
+
+    def update
+      doctor = Doctor.find(params[:id])
+      password = BCrypt::Password.create(params[:doctor][:encrypted_password])
+      doctor.update(category_id: params[:doctor][:category_id], name: params[:doctor][:name], surname: params[:doctor][:surname], 
+                    phone: params[:doctor][:phone], encrypted_password: password)
+      if doctor.save!
         redirect_to admin_doctors_path
         return
       else
@@ -36,19 +52,9 @@ ActiveAdmin.register Doctor do
     actions
   end
 
-  permit_params :category_id, :email, :phone, :name, :surname, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :category_id, :email, :token_update, :phone, :name, :surname, :encrypted_password, :token_update, :reset_password_token, :reset_password_sent_at, :remember_created_at
 
-  form do |f|
-    f.inputs do
-      f.input :category_id, as: :select, collection: Category.all
-      f.input :phone
-      f.input :name
-      f.input :surname
-      f.input :password
-      f.input :password_confirmation
-    end
-    f.actions
-  end
+  form partial: "form"
 
 
   #

@@ -24,7 +24,11 @@ class AppointmentsController < ApplicationController
         format.html { redirect_to appointments_path, notice: "Appointment was successfully created." }
         format.json { render :show, status: :created, location: @appointment }
       else
-        format.html { render :new, status: :unprocessable_entity, notice: "Appointment wasn't successfully created." }
+        format.html { 
+          redirect_to appointments_path,
+          status: :unprocessable_entity,
+          notice: "Appointment wasn't successfully created. Because the doctor has no more places for today or you have already booked an appointment." 
+        }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
@@ -40,17 +44,12 @@ class AppointmentsController < ApplicationController
   def add_recommendation
     @appointment = Appointment.find(params[:id])
     respond_to do |format|
-      if params[:recommendation] != ""
-        @appointment.update(recommendation: params[:recommendation], status: "done")
+      if @appointment.update(recommendation: params[:recommendation], status: "done")
         format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully added to the recommendation." }
         format.json { render :show, status: :ok, location: @appointment }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { 
-          render json: @appointment.errors,
-          notice: "Appointment wasn't successfully updated. Because recommendation empty.", 
-          status: :unprocessable_entity 
-        }
+        format.html { render :edit, status: :unprocessable_entity, locals: { appointment: @appointment } }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
   end

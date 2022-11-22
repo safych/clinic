@@ -1,4 +1,4 @@
-<div style="margin-top: -2.5%; margin-left: 1%">
+<div style="margin-left: 1%">
   <h1>Patient info:</h1>
   <ul>
     <li>Name: <%= current_patient.name %></li>
@@ -11,25 +11,25 @@
   <h2>Change password:</h2>
   <%= link_to "Change your password", edit_patient_registration_path %>
   <h2>Change data patient:</h2>
-  <%= form_with url: "/patients/#{current_patient.id}", method: :put do |f| %>
+  <%= form_with url: "/update/patient/#{current_patient.id}", method: :post do |f| %>
     <div class="field">
       <%= f.label :phone %><br />
-      <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", placeholder: "+380*********" %>
+      <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", placeholder: "+380*********", value: current_patient.phone %>
     </div>
 
     <div class="field">
       <%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", value: current_patient.name %>
     </div>
 
     <div class="field">
       <%= f.label :surname %><br />
-      <%= f.text_field :surname, autofocus: true, autocomplete: "surname" %>
+      <%= f.text_field :surname, autofocus: true, autocomplete: "surname", value: current_patient.surname %>
     </div>
 
     <div class="field">
       <%= f.label :age %><br />
-      <%= f.number_field :age, autofocus: true, autocomplete: "age" %>
+      <%= f.number_field :age, autofocus: true, autocomplete: "age", value: current_patient.age %>
     </div>
 
     <div class="field">
@@ -42,8 +42,10 @@
 
     <div class="field">
       <%= f.label :residence %><br />
-      <%= f.text_field :residence, autofocus: true, autocomplete: "residence" %>
+      <%= f.text_field :residence, autofocus: true, autocomplete: "residence", value: current_patient.residence %>
     </div>
+
+    <%= f.hidden_field :token_update, :value => current_patient.token_update %>
 
     <div style="margin-top: .5%">
       <%= f.submit "Update" %>
