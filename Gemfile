@@ -53,6 +53,7 @@ gem 'jquery-rails'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'cancancan'
 gem 'activeadmin'
+gem "image_processing", ">= 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -75,4 +76,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "byebug"
 end
