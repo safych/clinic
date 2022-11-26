@@ -1,4 +1,6 @@
 ActiveAdmin.register AdminUser do
+  controller.load_and_authorize_resource
+
   permit_params :email, :password, :password_confirmation
 
   index do
@@ -24,5 +26,4 @@ ActiveAdmin.register AdminUser do
     end
     f.actions
   end
-
 end

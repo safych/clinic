@@ -1,13 +1,8 @@
 require 'securerandom'
 
 ActiveAdmin.register Doctor do
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  # permitted_params
-
+  controller.load_and_authorize_resource
+  
   controller do
     def create
       @doctor = Doctor.new(doctor_params)

@@ -1,4 +1,8 @@
 class DoctorsController < ApplicationController
+  skip_authorization_check :only => [:index]
+  before_action :authenticate_doctor!, only: %i[profile edit_password check_password
+                                                update]
+
   def index
     @doctors = Doctor.all
   end
@@ -46,20 +50,6 @@ class DoctorsController < ApplicationController
       end
     end
   end
-
-  # def update_photo
-  #   doctor = Doctor.find_by(id: params[:id], token_update: params[:token_update])
-  #   respond_to do |format|
-  #     if !doctor.nil?
-  #       doctor.update(photo: params[:photo])
-  #       format.html { redirect_to profile_doctor_path, notice: "Doctor photo was successfully updated." }
-  #       format.json { render :show, status: :ok, location: @doctor }
-  #     else
-  #       format.html { redirect_to profile_doctor_path, status: :unprocessable_entity }
-  #       format.json { render json: @doctor.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
 
   private
 

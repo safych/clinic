@@ -29,7 +29,6 @@
           <% end %>
         </tbody>
     </table>
-        <%= link_to "New appointment", new_appointment_path %>
   <% elsif doctor_signed_in? %>
     <h1>Doctor appointments:</h1>
     <table class="table">
@@ -58,5 +57,8 @@
     </table>
   <% else %>
     <h1>You are not authorized!!!</h1>
+  <% end %>
+  <% if can? :create, Appointment %>
+    <%= link_to "New appointment", new_appointment_path %>
   <% end %>
 </div>

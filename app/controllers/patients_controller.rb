@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+  load_and_authorize_resource
+
   def update
     patient = Patient.find_by(id: params[:id], token_update: params[:token_update])
     if !patient.nil?
