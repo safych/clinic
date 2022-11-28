@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  protect_from_forgery
+  protect_from_forgery 
   check_authorization unless: :devise_controller?
 
   def configure_permitted_parameters
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     elsif doctor_signed_in?
       @current_user ||= Doctor.find(current_doctor.id)
     elsif admin_user_signed_in?
-      @current_user ||= Doctor.find(current_admin_user.id)
+      @current_admin_user ||= AdminUser.find(current_admin_user.id)
     end
   end
 end

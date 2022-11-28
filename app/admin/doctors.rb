@@ -1,7 +1,7 @@
 require 'securerandom'
 
 ActiveAdmin.register Doctor do
-  controller.load_and_authorize_resource
+  controller.skip_authorization_check
   
   controller do
     def create
@@ -50,15 +50,4 @@ ActiveAdmin.register Doctor do
   permit_params :category_id, :email, :token_update, :phone, :name, :surname, :encrypted_password, :token_update, :reset_password_token, :reset_password_sent_at, :remember_created_at
 
   form partial: "form"
-
-
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:category_id, :email, :phone, :encrypted_password, :name, :surname, :reset_password_token, :reset_password_sent_at, :remember_created_at]
-  #   permitted << :other if params[:action] == 'create' && current_admin_user
-  #   permitted
-  # end
-  
 end

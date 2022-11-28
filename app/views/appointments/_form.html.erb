@@ -22,6 +22,10 @@
   </div>
 
   <div>
+     <%= form.hidden_field :token_update, :value => current_patient.token_update %>
+  </div>
+
+  <div>
      <%= form.hidden_field :status, :value => "wait" %>
   </div>
 

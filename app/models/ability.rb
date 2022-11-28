@@ -11,12 +11,11 @@ class Ability
     elsif user.class.name == "Doctor"
       can :manage, Appointment
       cannot :create, Appointment
-      can :read, :all
+      can :manage, Doctor
     elsif user.class.name == "Patient"
       can :manage, Appointment
       cannot :update, Appointment
       can :manage, Patient
-      can :read, :all
     end
   end
 end

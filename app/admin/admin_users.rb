@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  controller.load_and_authorize_resource
+  controller.skip_authorization_check
 
   permit_params :email, :password, :password_confirmation
 

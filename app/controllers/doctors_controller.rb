@@ -1,7 +1,6 @@
 class DoctorsController < ApplicationController
-  skip_authorization_check :only => [:index]
-  before_action :authenticate_doctor!, only: %i[profile edit_password check_password
-                                                update]
+  load_and_authorize_resource
+  skip_authorization_check :index
 
   def index
     @doctors = Doctor.all

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  ActiveAdmin::Devise.config[:controllers][:sessions] = 'admin/sessions'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  ActiveAdmin::Devise.config[:controllers][:sessions] = 'admin/sessions'
   
   devise_for :doctors, :skip => [:registrations], controllers: { sessions: "doctors/sessions" }
   devise_scope :doctors do
@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     get "/profile/doctor", to: "doctors#profile"
     post "/edit_password/doctor/:id", to: "doctors#edit_password"
     post "/update/doctor/:id", to: "doctors#update"
-    # post "/update_photo/doctor/:id", to: "doctors#update_photo"
   end
   devise_for :patients, controllers: { registrations: "patients/registrations", sessions: "patients/sessions" }
   devise_scope :patients do

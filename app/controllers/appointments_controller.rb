@@ -18,7 +18,8 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
-    verification = Appointment.find_by(patient_id: params[:appointment][:patient_id], date: @appointment.date, doctor_id: params[:appointment][:doctor_id])
+    patient = Patient.find_by(id: params[:appointment][:patient_id], token_update: params[:appointment][:token_update])
+    verification = Appointment.find_by(patient_id: patient.id, date: @appointment.date, doctor_id: params[:appointment][:doctor_id])
     respond_to do |format|
       if count_appointment.length < 11 && verification.nil?
         @appointment.save
@@ -43,7 +44,8 @@ class AppointmentsController < ApplicationController
 
 
   def add_recommendation
-    @appointment = Appointment.find(params[:id])
+    doctor = Doctor.find_by(id: params[:doctor_id], token_update: params[:token_update])
+    @appointment = Appointment.find_by(id: params[:id], doctor_id: doctor.id)
     respond_to do |format|
       if @appointment.update(recommendation: params[:recommendation], status: "done")
         format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully added to the recommendation." }
