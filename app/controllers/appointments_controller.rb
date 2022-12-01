@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: %i[ show edit update destroy ]
+  before_action :set_appointment, only: %i[ show edit destroy ]
   load_and_authorize_resource
 
   def index
@@ -18,13 +18,12 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
-    patient = Patient.find_by(id: params[:appointment][:patient_id], token_update: params[:appointment][:token_update])
-    verification = Appointment.find_by(patient_id: patient.id, date: @appointment.date, doctor_id: params[:appointment][:doctor_id])
+    verification = Appointment.find_by(patient_id: params[:appointment][:patient_id], date: @appointment.date, doctor_id: params[:appointment][:doctor_id])
     respond_to do |format|
       if count_appointment.length < 11 && verification.nil?
         @appointment.save
         format.html { redirect_to appointments_path, notice: "Appointment was successfully created." }
-        format.json { render :show, status: :created, location: @appointment }
+        format.json { render :index, status: :created }
       else
         format.html { 
           redirect_to appointments_path,
@@ -44,8 +43,7 @@ class AppointmentsController < ApplicationController
 
 
   def add_recommendation
-    doctor = Doctor.find_by(id: params[:doctor_id], token_update: params[:token_update])
-    @appointment = Appointment.find_by(id: params[:id], doctor_id: doctor.id)
+    @appointment = Appointment.find_by(id: params[:id])
     respond_to do |format|
       if @appointment.update(recommendation: params[:recommendation], status: "done")
         format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully added to the recommendation." }

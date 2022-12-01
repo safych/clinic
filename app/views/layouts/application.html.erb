@@ -23,14 +23,14 @@
             <%= link_to "Profile", profile_patient_path, class: "nav-item nav-link active" %>
             <%= link_to "Doctors", doctors_path, class: "nav-item nav-link active" %>
             <%= link_to "Appointments", appointments_path, class: "nav-item nav-link active" %>
-            <%= link_to "Вийти", destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
+            <%= link_to "Log out", destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% elsif doctor_signed_in? %>
             <%= link_to "Profile", profile_doctor_path, class: "nav-item nav-link active" %>
             <%= link_to "Appointments", appointments_path, class: "nav-item nav-link active" %>
-            <%= link_to "Вийти", destroy_doctor_session_path, method: :delete, class: "nav-item nav-link active" %>
+            <%= link_to "Log out", destroy_doctor_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% else %>
             <%= link_to "Doctors", doctors_path, class: "nav-item nav-link active" %>
-            <%= link_to "Вхід", new_patient_session_path, class: "nav-item nav-link active" %>
+            <%= link_to "Log in", new_patient_session_path, class: "nav-item nav-link active" %>
           <% end %>
         </div>
       </div>

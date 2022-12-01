@@ -1,6 +1,4 @@
 class Patient < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -9,11 +7,10 @@ class Patient < ApplicationRecord
   validates_length_of :name, minimum: 2
   validates_length_of :surname, minimum: 2
   validates_length_of :residence, minimum: 8, maximum: 30
-  validates_length_of :encrypted_password, minimum: 6, allow_blank: true
   validates_length_of :password, minimum: 6, allow_blank: true
   validates_length_of :password_confirmation, minimum: 6, allow_blank: true
   validates :age, numericality: { less_than_or_equal_to: 100, only_integer: true }
-  validates :phone, uniqueness: true, length: {is: 13}
+  validates :phone, uniqueness: true, format: { with: /\A\+?380[345679]\d{8}\z/, message: "Incorrectly entered phone number" }
 
   def email_required?
     false
