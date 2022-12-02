@@ -3,7 +3,33 @@ class AppointmentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @appointments = Appointment.all
+    if current_user.class.name == "Patient"
+      search_patient
+    elsif current_user.class.name == "Doctor"
+      search_doctor
+    end
+  end
+
+  def search_patient
+    if params[:search_status].present?
+      @appointments = Appointment.where(patient_id: current_user.id, status: params[:search_status]).order('id DESC')
+    elsif params["search_date(1i)"].present?
+      date = Date.new(params["search_date(1i)"].to_i, params["search_date(2i)"].to_i, params["search_date(3i)"].to_i)
+      @appointments = Appointment.where(patient_id: current_user.id, date: date.to_fs(:iso8601))
+    else
+      @appointments = Appointment.where(patient_id: current_user.id).limit(50).order('id DESC')
+    end
+  end
+
+  def search_doctor
+    if params[:search_status].present?
+      @appointments = Appointment.where(doctor_id: current_user.id, status: params[:search_status]).order('id DESC')
+    elsif params[:search_date].present?
+      date = Date.new(params["search_date(1i)"].to_i, params["search_date(2i)"].to_i, params["search_date(3i)"].to_i)
+      @appointments = Appointment.where(doctor_id: current_user.id, date: date.to_fs(:iso8601))
+    else
+      @appointments = Appointment.where(doctor_id: current_user.id).order('id DESC')
+    end
   end
 
   def show
@@ -71,5 +97,9 @@ class AppointmentsController < ApplicationController
 
     def appointment_params
       params.require(:appointment).permit(:doctor_id, :patient_id, :status, :recommendation, :date)
+    end
+
+    def date_params
+      params.require(:appointment).permit(:date)
     end
 end

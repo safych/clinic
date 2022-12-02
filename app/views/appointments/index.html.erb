@@ -1,6 +1,25 @@
 <div style="margin-left: 1%">
   <p style="color: green"><%= notice %></p>
-
+  <h3>Пошук за датою запису</h3>
+  <%= form_with url: "../appointments/", method: :get do |f| %>
+    <%= f.label :search_date, style: "display: block" %>
+    <%= f.date_select :search_date %>
+    <br>
+    <%= submit_tag 'Пошук' %>
+  <% end %>
+  <h3>Пошук по статусу</h3>
+  <%= form_with url: "../appointments/", method: :get do |f| %>
+    <%= f.label :search_status, style: "display: block" %>
+    <%= radio_button_tag(:search_status, "wait") %>
+      <%= label_tag(:gender_man, "Wait status") %>
+    <%= radio_button_tag(:search_status, "done") %>
+      <%= label_tag(:gender_women, "Done status") %>
+    <br>
+    <%= submit_tag 'Пошук' %>
+  <% end %>
+  <% if can? :create, Appointment %>
+    <%= link_to "New appointment", new_appointment_path %>
+  <% end %>
   <% if patient_signed_in? %>
     <h1>Patient appointments:</h1>
     <table class="table">
@@ -15,17 +34,15 @@
         </thead>
         <tbody>
           <% @appointments.each do |appointment| %>
-            <% if appointment.patient_id.eql? current_patient.id %>
               <tr>
                 <td>#</td>
                 <td>
-                  <%= "#{appointment.doctor.surname} #{appointment.doctor.name} #{appointment.doctor.category.title}" %>
+                  <%= "#{appointment.doctor.surname} #{appointment.doctor.name} - #{appointment.doctor.category.title}" %>
                 </td>
                 <td><%= appointment.status %></td>
                 <td><%= appointment.date %></td>
                 <td><%= link_to "Show this appointment", appointment %></td>
               </tr>
-            <% end %>
           <% end %>
         </tbody>
     </table>
@@ -57,8 +74,5 @@
     </table>
   <% else %>
     <h1>You are not authorized!!!</h1>
-  <% end %>
-  <% if can? :create, Appointment %>
-    <%= link_to "New appointment", new_appointment_path %>
   <% end %>
 </div>

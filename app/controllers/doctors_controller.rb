@@ -4,6 +4,11 @@ class DoctorsController < ApplicationController
 
   def index
     @doctors = Doctor.all
+    if params[:search_category].present?
+      @doctors = Doctor.where(category_id: params[:search_category])
+    elsif params[:search_surname].present?
+      @doctors = Doctor.where(surname: params[:search_surname])
+    end 
   end
 
   def profile
