@@ -1,5 +1,6 @@
 <div style="margin-left: 1%">
   <h1>Profile doctor</h1>
+  <%= cl_image_tag doctor_avatar(current_doctor), class: "w-25 p-3" %>
   <ul>
     <li>Name: <%= current_doctor.name %></li>
     <li>Surname: <%= current_doctor.surname %></li>
@@ -48,6 +49,11 @@
     <div class="field">
       <%= f.label :phone %><br />
       <%= f.text_field :phone, autofocus: true, autocomplete: "phone", value: current_doctor.phone %>
+    </div>
+
+    <div>
+      <%= f.label :avatar %><br />
+      <%= f.file_field :avatar, direct_upload: true %>
     </div>
 
     <div style="margin-top: .5%">

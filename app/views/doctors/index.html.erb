@@ -30,7 +30,7 @@
       <% if !@doctors.nil? %>
         <% @doctors.each do |doctor| %>
           <tr>
-            <td>#</td>
+            <td><%= cl_image_tag doctor_avatar(doctor, 40), class: "w-25 p-3" %></td>
             <td><%= doctor.name %></td>
             <td><%= doctor.surname %></td>
             <td><%= doctor.category.title %></td>

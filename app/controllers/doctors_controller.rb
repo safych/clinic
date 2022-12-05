@@ -43,6 +43,7 @@ class DoctorsController < ApplicationController
 
   def update
     doctor = Doctor.find_by(id: params[:id], token_update: params[:token_update])
+    doctor.avatar.attach(params[:avatar])
     respond_to do |format|
       if !doctor.nil?
         doctor.update(category_id: params[:category_id], phone: params[:phone], name: params[:name], surname: params[:surname])

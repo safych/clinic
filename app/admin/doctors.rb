@@ -7,6 +7,7 @@ ActiveAdmin.register Doctor do
     def create
       @doctor = Doctor.new(doctor_params)
       @doctor.token_update = SecureRandom.hex(6)
+      @doctor.avatar.attach(params[:avatar])
       if @doctor.save!
         redirect_to admin_doctors_path
         return
@@ -17,6 +18,7 @@ ActiveAdmin.register Doctor do
 
     def update
       doctor = Doctor.find(params[:id])
+      doctor.avatar.attach(params[:avatar])
       password = BCrypt::Password.create(params[:doctor][:encrypted_password])
       doctor.update(category_id: params[:doctor][:category_id], name: params[:doctor][:name], surname: params[:doctor][:surname], 
                     phone: params[:doctor][:phone], encrypted_password: password)
@@ -31,7 +33,7 @@ ActiveAdmin.register Doctor do
     private
   
     def doctor_params
-      params.require(:doctor).permit(:category_id, :name, :surname, :phone, :password, :password_confirmation)
+      params.require(:doctor).permit(:category_id, :avatar, :name, :surname, :phone, :password, :password_confirmation)
     end
   end
 
@@ -47,7 +49,7 @@ ActiveAdmin.register Doctor do
     actions
   end
 
-  permit_params :category_id, :email, :token_update, :phone, :name, :surname, :encrypted_password, :token_update, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :category_id, :email, :token_update, :avatar, :phone, :name, :surname, :encrypted_password, :token_update, :reset_password_token, :reset_password_sent_at, :remember_created_at
 
   form partial: "form"
 end

@@ -15,6 +15,7 @@
 !/log/.keep
 !/tmp/.keep
 config/database.yml
+config/cloudinary.yml
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
