@@ -33,3 +33,5 @@ config/cloudinary.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+# Ignore HOSTNAME
+/.env

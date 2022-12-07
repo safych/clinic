@@ -18,7 +18,7 @@ gem "puma", "~> 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# Hotwire"s SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
 # Hotwire"s modest JavaScript framework [https://stimulus.hotwired.dev]
@@ -54,6 +54,7 @@ gem "devise", "~> 4.8", ">= 4.8.1"
 gem "cancancan"
 gem "activeadmin"
 gem "cloudinary"
+gem "dotenv-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -61,6 +62,10 @@ group :development, :test do
   gem "rspec-rails", "~> 6.0.0"
   gem "factory_bot_rails", "~> 6.2"
   gem "capybara"
+  gem "capistrano", "~> 3.10", require: false
+  gem "capistrano-rails", "~> 1.6", require: false
+  gem "capistrano-rvm"
+  gem "capistrano-bundler"
 end
 
 group :development do
