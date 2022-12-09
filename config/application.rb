@@ -13,6 +13,9 @@ module Clinic
     
     config.active_storage.variant_processor = :mini_magick
 
+    config.require_master_key = false
+    config.read_encrypted_secrets = false
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
