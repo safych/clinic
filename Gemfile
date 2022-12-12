@@ -64,16 +64,16 @@ group :development, :test do
   gem "rspec-rails", "~> 6.0.0"
   gem "factory_bot_rails", "~> 6.2"
   gem "capybara", "~> 2.7"
-
-  gem "capistrano", "~> 3.10"
-  gem "capistrano-rails", "~> 1.6"
-  gem "capistrano-rvm", "~> 0.1.2"
-  gem "capistrano-bundler", "~> 2.1"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  gem "capistrano"
+  gem "capistrano-rails"
+  gem "capistrano-rvm"
+  gem "capistrano-bundler"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
