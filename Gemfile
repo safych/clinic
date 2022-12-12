@@ -61,12 +61,12 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails", "~> 6.0.0"
   gem "factory_bot_rails", "~> 6.2"
-  gem "capybara"
+  gem "capybara", "~> 2.7"
 
-  gem "capistrano", "~> 3.10", require: false
-  gem "capistrano-rails", "~> 1.6", require: false
-  gem "capistrano-rvm"
-  gem "capistrano-bundler"
+  gem "capistrano", "~> 3.10"
+  gem "capistrano-rails", "~> 1.6"
+  gem "capistrano-rvm", "~> 0.1.2"
+  gem "capistrano-bundler", "~> 2.1"
 end
 
 group :development do
@@ -82,7 +82,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "byebug"
