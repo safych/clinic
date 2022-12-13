@@ -15,6 +15,7 @@ set :default_env, { rvm_bin_path: "~/.rvm/bin" }
 append :linked_files, 'config/master.key'
 
 namespace :deploy do
+  Rake::Task["migrate"].clear_actions
   namespace :check do
     before :linked_files, :set_master_key do
       on roles(:app), in: :sequence, wait: 10 do
