@@ -364,9 +364,9 @@ DEPENDENCIES
   bootstrap (~> 5.2.2)
   byebug
   cancancan
-  capistrano
-  capistrano-rails
-  capistrano-rvm
+  capistrano (~> 3.17)
+  capistrano-rails (~> 1.6)
+  capistrano-rvm (~> 0.1.2)
   capybara (~> 2.7)
   cloudinary
   debug
