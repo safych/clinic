@@ -55,8 +55,6 @@ gem "cancancan"
 gem "activeadmin"
 gem "cloudinary"
 gem "dotenv-rails"
-gem 'execjs'
-gem 'therubyracer'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -72,7 +70,7 @@ group :development do
 
   gem "capistrano", "~> 3.17", require: false
   gem "capistrano-rails", "~> 1.6", require: false
-  gem "capistrano-rvm", "~> 0.1.2", require: false
+  gem "capistrano-rvm", "~> 0.1.2"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
