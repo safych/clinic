@@ -15,7 +15,7 @@ class DoctorsController < ApplicationController
   end
 
   def edit_password
-    doctor = Doctor.find_by(id: params[:id], token_update: params[:token_update])
+    doctor = Doctor.find_by(id: params[:id])
     respond_to do |format|
       if !doctor.nil? && check_password
         password = BCrypt::Password.create(params[:password])
@@ -34,7 +34,7 @@ class DoctorsController < ApplicationController
   end
 
   def edit_photo
-    doctor = Doctor.find_by(id: params[:id], token_update: params[:token_update])
+    doctor = Doctor.find_by(id: params[:id])
     respond_to do |format|
       if !doctor.nil?
         doctor.avatar.attach(params[:avatar])
@@ -56,7 +56,7 @@ class DoctorsController < ApplicationController
   end
 
   def update
-    doctor = Doctor.find_by(id: params[:id], token_update: params[:token_update])
+    doctor = Doctor.find_by(id: params[:id])
     respond_to do |format|
       if !doctor.nil?
         doctor.update(category_id: params[:category_id], phone: params[:phone], name: params[:name], surname: params[:surname])

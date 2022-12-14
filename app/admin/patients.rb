@@ -17,7 +17,7 @@ ActiveAdmin.register Patient do
     end
   end
 
-  permit_params :email, :phone, :encrypted_password, :token_update, :name, :surname, :age, :gender, :residence, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :email, :phone, :encrypted_password, :name, :surname, :age, :gender, :residence, :reset_password_token, :reset_password_sent_at, :remember_created_at
   
   form partial: "form"
 

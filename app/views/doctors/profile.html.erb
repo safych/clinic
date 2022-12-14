@@ -1,6 +1,6 @@
 <div style="margin-left: 1%">
   <h1>Profile doctor</h1>
-  <%= cl_image_tag doctor_avatar(current_doctor), class: "w-25 p-3" %>
+  <%= cl_image_tag doctor_avatar(current_doctor, 40), class: "w-25 p-3" %>
   <ul>
     <li>Name: <%= current_doctor.name %></li>
     <li>Surname: <%= current_doctor.surname %></li>
@@ -19,17 +19,12 @@
       <%= f.password_field :password_confirmation %>
     </div>
 
-    <%= f.hidden_field :token_update, :value => current_doctor.token_update %>
-    <%= f.hidden_field :id, :value => current_doctor.id %>
-
     <div style="margin-top: .5%">
       <%= f.submit "Update password" %>
     </div>
   <% end %>
   <h2>Change data:</h2>
   <%= form_with url: "/update/doctor/#{current_doctor.id}", method: :post do |f| %>
-    <%= f.hidden_field :token_update, :value => current_doctor.token_update %>
-
     <div class="field">
       <%= f.label :category_id %><br />
       <%= f.select(:category_id, Category.all.collect { |category| [category.title, category.id] }, selected: current_doctor.category_id) %>
@@ -57,8 +52,6 @@
   <h2>Change photo:</h2>
   <p>If you do not select a new photo, the old one will be deleted!</p>
   <%= form_with url: "/edit_photo/doctor/#{current_doctor.id}", method: :post do |f| %>
-    <%= f.hidden_field :token_update, :value => current_doctor.token_update %>
-
     <div>
       <%= f.label :avatar %><br />
       <%= f.file_field :avatar, direct_upload: true %>

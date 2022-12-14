@@ -1,12 +1,9 @@
-require 'securerandom'
-
 ActiveAdmin.register Doctor do
   controller.skip_authorization_check
   
   controller do
     def create
       @doctor = Doctor.new(doctor_params)
-      @doctor.token_update = SecureRandom.hex(6)
       @doctor.avatar.attach(params[:avatar])
       if @doctor.save!
         redirect_to admin_doctors_path
@@ -49,7 +46,7 @@ ActiveAdmin.register Doctor do
     actions
   end
 
-  permit_params :category_id, :email, :token_update, :avatar, :phone, :name, :surname, :encrypted_password, :token_update, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :category_id, :email, :avatar, :phone, :name, :surname, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
 
   form partial: "form"
 end

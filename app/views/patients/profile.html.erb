@@ -45,8 +45,6 @@
       <%= f.text_field :residence, autofocus: true, autocomplete: "residence", value: current_patient.residence %>
     </div>
 
-    <%= f.hidden_field :token_update, :value => current_patient.token_update %>
-
     <div style="margin-top: .5%">
       <%= f.submit "Update" %>
     </div>
