@@ -33,6 +33,20 @@ class DoctorsController < ApplicationController
     end
   end
 
+  def edit_photo
+    doctor = Doctor.find_by(id: params[:id], token_update: params[:token_update])
+    respond_to do |format|
+      if !doctor.nil?
+        doctor.avatar.attach(params[:avatar])
+        format.html { redirect_to profile_doctor_path, notice: "Doctor avatar was successfully updated." }
+        format.json { render :show, status: :ok, location: @doctor }
+      else
+        format.html { redirect_to profile_doctor_path, status: :unprocessable_entity }
+        format.json { render json: @doctor.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def check_password
     if params[:password].to_s.length > 5 && params[:password] === params[:password_confirmation]
       true
@@ -43,7 +57,6 @@ class DoctorsController < ApplicationController
 
   def update
     doctor = Doctor.find_by(id: params[:id], token_update: params[:token_update])
-    doctor.avatar.attach(params[:avatar])
     respond_to do |format|
       if !doctor.nil?
         doctor.update(category_id: params[:category_id], phone: params[:phone], name: params[:name], surname: params[:surname])

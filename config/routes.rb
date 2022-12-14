@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get "/doctors", to: "doctors#index"
     get "/profile/doctor", to: "doctors#profile"
     post "/edit_password/doctor/:id", to: "doctors#edit_password"
+    post "/edit_photo/doctor/:id", to: "doctors#edit_photo"
     post "/update/doctor/:id", to: "doctors#update"
   end
   devise_for :patients, controllers: { registrations: "patients/registrations", sessions: "patients/sessions" }

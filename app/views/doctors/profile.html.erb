@@ -29,7 +29,6 @@
   <h2>Change data:</h2>
   <%= form_with url: "/update/doctor/#{current_doctor.id}", method: :post do |f| %>
     <%= f.hidden_field :token_update, :value => current_doctor.token_update %>
-    <%= f.hidden_field :id, :value => current_doctor.id %>
 
     <div class="field">
       <%= f.label :category_id %><br />
@@ -51,13 +50,22 @@
       <%= f.text_field :phone, autofocus: true, autocomplete: "phone", value: current_doctor.phone %>
     </div>
 
+    <div style="margin-top: .5%">
+      <%= f.submit "Update data" %>
+    </div>
+  <% end %>
+  <h2>Change photo:</h2>
+  <p>If you do not select a new photo, the old one will be deleted!</p>
+  <%= form_with url: "/edit_photo/doctor/#{current_doctor.id}", method: :post do |f| %>
+    <%= f.hidden_field :token_update, :value => current_doctor.token_update %>
+
     <div>
       <%= f.label :avatar %><br />
       <%= f.file_field :avatar, direct_upload: true %>
     </div>
 
     <div style="margin-top: .5%">
-      <%= f.submit "Update data" %>
+      <%= f.submit "Update photo" %>
     </div>
   <% end %>
   <% flash.each do |type, msg| %>
