@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 
 class Patients::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
