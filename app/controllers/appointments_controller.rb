@@ -24,7 +24,7 @@ class AppointmentsController < ApplicationController
   def search_doctor
     if params[:search_status].present?
       @appointments = Appointment.where(doctor_id: current_user.id, status: params[:search_status]).order('id DESC')
-    elsif params[:search_date].present?
+    elsif params["search_date(1i)"].present?
       date = Date.new(params["search_date(1i)"].to_i, params["search_date(2i)"].to_i, params["search_date(3i)"].to_i)
       @appointments = Appointment.where(doctor_id: current_user.id, date: date.to_fs(:iso8601))
     else
