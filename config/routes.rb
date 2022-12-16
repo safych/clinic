@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    root to: "welcome#index"
+  end
+
   ActiveAdmin::Devise.config[:controllers][:sessions] = 'admin/sessions'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -18,7 +22,5 @@ Rails.application.routes.draw do
   end
   resources :appointments
   put "/update/appointments", to: "appointments#add_recommendation"
-  root to: "welcome#index"
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end

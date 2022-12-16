@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Clinic</title>
+    <title><%= t('header.title') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,24 +13,24 @@
   <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">Polyclinic</a>
+      <a class="navbar-brand" href="/"><%= t('header.title') %></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <% if patient_signed_in? %>
-            <%= link_to "Profile", profile_patient_path, class: "nav-item nav-link active" %>
-            <%= link_to "Doctors", doctors_path, class: "nav-item nav-link active" %>
-            <%= link_to "Appointments", appointments_path, class: "nav-item nav-link active" %>
-            <%= link_to "Log out", destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
+            <%= link_to t('header.profile'), profile_patient_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.doctors'), doctors_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.appointments_patient'), appointments_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.log_out'), destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% elsif doctor_signed_in? %>
-            <%= link_to "Profile", profile_doctor_path, class: "nav-item nav-link active" %>
-            <%= link_to "Appointments", appointments_path, class: "nav-item nav-link active" %>
-            <%= link_to "Log out", destroy_doctor_session_path, method: :delete, class: "nav-item nav-link active" %>
+            <%= link_to t('header.profile'), profile_doctor_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.appointments_doctor'), appointments_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.log_out'), destroy_doctor_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% else %>
-            <%= link_to "Doctors", doctors_path, class: "nav-item nav-link active" %>
-            <%= link_to "Log in", new_patient_session_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.doctors'), doctors_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.log_in'), new_patient_session_path, class: "nav-item nav-link active" %>
           <% end %>
         </div>
       </div>

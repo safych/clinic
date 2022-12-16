@@ -1,0 +1,10 @@
+uk:
+  welcome: "Ласкаво просимо в поліклініку"
+  header:
+    title: "Поліклініка"
+    doctors: "Лікарі"
+    profile: "Профайл"
+    appointments_patient: "Прийоми в лікаря"
+    appointments_doctor: "Прийоми пацієнтів"
+    log_in: "Авторизуватися"
+    log_out: "Вийти"
