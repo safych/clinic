@@ -1,0 +1,9 @@
+<div style="margin-left: 1%; margin-top: 1%">
+  <% if patient_signed_in? %>
+    <%= render "patient" %>
+  <% elsif doctor_signed_in? %>
+    <%= render "doctor" %>
+  <% else %>
+    <h1>User is not authorization</h1>
+  <% end %>
+</div>

@@ -20,12 +20,12 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <% if patient_signed_in? %>
-            <%= link_to t('header.profile'), profile_patient_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.profile'), profile_path, class: "nav-item nav-link active" %>
             <%= link_to t('header.doctors'), doctors_path, class: "nav-item nav-link active" %>
             <%= link_to t('header.appointments_patient'), appointments_path, class: "nav-item nav-link active" %>
             <%= link_to t('header.log_out'), destroy_patient_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% elsif doctor_signed_in? %>
-            <%= link_to t('header.profile'), profile_doctor_path, class: "nav-item nav-link active" %>
+            <%= link_to t('header.profile'), profile_path, class: "nav-item nav-link active" %>
             <%= link_to t('header.appointments_doctor'), appointments_path, class: "nav-item nav-link active" %>
             <%= link_to t('header.log_out'), destroy_doctor_session_path, method: :delete, class: "nav-item nav-link active" %>
           <% else %>

@@ -11,9 +11,6 @@ class DoctorsController < ApplicationController
     end 
   end
 
-  def profile
-  end
-
   def edit_password
     doctor = Doctor.find_by(id: params[:id])
     respond_to do |format|
@@ -24,7 +21,7 @@ class DoctorsController < ApplicationController
         format.json { render :show, status: :ok, location: @doctor }
       else
         format.html { 
-          redirect_to profile_doctor_path, 
+          redirect_to profile_path, 
           status: :unprocessable_entity, 
           notice: "Doctor password wasn't successfully updated." 
         }
@@ -38,7 +35,7 @@ class DoctorsController < ApplicationController
     respond_to do |format|
       if !doctor.nil?
         doctor.avatar.attach(params[:avatar])
-        format.html { redirect_to profile_doctor_path, notice: "Doctor avatar was successfully updated." }
+        format.html { redirect_to profile_path, notice: "Doctor avatar was successfully updated." }
         format.json { render :show, status: :ok, location: @doctor }
       else
         format.html { redirect_to profile_doctor_path, status: :unprocessable_entity }
@@ -60,7 +57,7 @@ class DoctorsController < ApplicationController
     respond_to do |format|
       if !doctor.nil?
         doctor.update(category_id: params[:category_id], phone: params[:phone], name: params[:name], surname: params[:surname])
-        format.html { redirect_to profile_doctor_path, notice: "Doctor was successfully updated." }
+        format.html { redirect_to profile_path, notice: "Doctor was successfully updated." }
         format.json { render :show, status: :ok, location: @doctor }
       else
         format.html { redirect_to profile_doctor_path, status: :unprocessable_entity }
