@@ -3,11 +3,11 @@ class DoctorsController < ApplicationController
   skip_authorization_check :index
 
   def index
-    @doctors = Doctor.all
+    @doctors = Doctor.page params[:page]
     if params[:search_category].present?
-      @doctors = Doctor.where(category_id: params[:search_category])
+      @doctors = Doctor.where(category_id: params[:search_category]).page params[:page]
     elsif params[:search_surname].present?
-      @doctors = Doctor.where(surname: params[:search_surname])
+      @doctors = Doctor.where(surname: params[:search_surname]).page params[:page]
     end 
   end
 

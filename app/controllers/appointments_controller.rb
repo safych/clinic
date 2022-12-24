@@ -12,12 +12,13 @@ class AppointmentsController < ApplicationController
 
   def search_patient
     if params[:search_status].present?
-      @appointments = Appointment.where(patient_id: current_user.id, status: params[:search_status]).order('id DESC')
+      @appointments = Appointment.where(patient_id: current_user.id, status: params[:search_status])
+                                 .order('id DESC').page params[:page]
     elsif params["search_date(1i)"].present?
       date = Date.new(params["search_date(1i)"].to_i, params["search_date(2i)"].to_i, params["search_date(3i)"].to_i)
-      @appointments = Appointment.where(patient_id: current_user.id, date: date.to_fs(:iso8601))
+      @appointments = Appointment.where(patient_id: current_user.id, date: date.to_fs(:iso8601)).page params[:page]
     else
-      @appointments = Appointment.where(patient_id: current_user.id).limit(50).order('id DESC')
+      @appointments = Appointment.where(patient_id: current_user.id).limit(50).order('id DESC').page params[:page]
     end
   end
 
