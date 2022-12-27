@@ -1,74 +1,29 @@
 class DoctorsController < ApplicationController
+  before_action :set_doctor, only: %i[update_password update_photo update show]
   load_and_authorize_resource
   skip_authorization_check :index
 
   def index
-    @doctors = Doctor.page params[:page]
-    if params[:search_category].present?
-      @doctors = Doctor.where(category_id: params[:search_category]).page params[:page]
-    elsif params[:search_surname].present?
-      @doctors = Doctor.where(surname: params[:search_surname]).page params[:page]
-    end 
+    @doctors = DoctorsListQuery.new(params[:search_category], params[:search_surname], params[:page]).show
   end
 
-  def edit_password
-    doctor = Doctor.find_by(id: params[:id])
-    respond_to do |format|
-      if !doctor.nil? && check_password
-        password = BCrypt::Password.create(params[:password])
-        doctor.update(encrypted_password: password)
-        format.html { redirect_to new_doctor_session_path, notice: "Doctor password was successfully updated." }
-        format.json { render :show, status: :ok, location: @doctor }
-      else
-        format.html { 
-          redirect_to profile_path, 
-          status: :unprocessable_entity, 
-          notice: "Doctor password wasn't successfully updated." 
-        }
-        format.json { render json: @doctor.errors, status: :unprocessable_entity }
-      end
-    end
+  def update_password
+    DoctorsService.new(@doctor, params[:password], params[:password_confirmation], nil, nil, nil, nil,
+                       nil).update_password
   end
 
-  def edit_photo
-    doctor = Doctor.find_by(id: params[:id])
-    respond_to do |format|
-      if !doctor.nil?
-        doctor.avatar.attach(params[:avatar])
-        format.html { redirect_to profile_path, notice: "Doctor avatar was successfully updated." }
-        format.json { render :show, status: :ok, location: @doctor }
-      else
-        format.html { redirect_to profile_doctor_path, status: :unprocessable_entity }
-        format.json { render json: @doctor.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def check_password
-    if params[:password].to_s.length > 5 && params[:password] === params[:password_confirmation]
-      true
-    else
-      false
-    end
+  def update_photo
+    DoctorsService.new(@doctor, nil, nil, params[:avatar], nil, nil, nil, nil).update_photo
   end
 
   def update
-    doctor = Doctor.find_by(id: params[:id])
-    respond_to do |format|
-      if !doctor.nil?
-        doctor.update(category_id: params[:category_id], phone: params[:phone], name: params[:name], surname: params[:surname])
-        format.html { redirect_to profile_path, notice: "Doctor was successfully updated." }
-        format.json { render :show, status: :ok, location: @doctor }
-      else
-        format.html { redirect_to profile_doctor_path, status: :unprocessable_entity }
-        format.json { render json: @doctor.errors, status: :unprocessable_entity }
-      end
-    end
+    DoctorsService.new(@doctor, nil, nil, nil, params[:category_id], params[:phone], params[:name], 
+                       params[:surname]).update
   end
 
   private
 
-  def doctor_params
-    params.require(:category).permit(:phone, :name, :surname, :category_id)
+  def set_doctor
+    @doctor = Doctor.find(params[:id])
   end
 end

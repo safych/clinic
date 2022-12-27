@@ -41,12 +41,14 @@ ActiveAdmin.register Doctor do
     column :name
     column :surname
     column "Category" do |c|
-      categor = Category.find(c.category_id).title
+      Category.find(c.category_id).title unless c.category_id.nil?
     end
     actions
   end
 
-  permit_params :category_id, :email, :avatar, :phone, :name, :surname, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
+
+  permit_params :category_id, :email, :avatar, :phone, :name, :surname, :encrypted_password, :reset_password_token, 
+                :reset_password_sent_at, :remember_created_at
 
   form partial: "form"
 end

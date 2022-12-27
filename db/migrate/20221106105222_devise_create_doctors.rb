@@ -4,7 +4,7 @@ class DeviseCreateDoctors < ActiveRecord::Migration[7.0]
   def change
     create_table :doctors do |t|
       ## Database authenticatable
-      t.references :category, null: false, foreign_key: true
+      t.references :category, foreign_key: true
       t.string :email,              null: false, default: ""
       t.string :phone,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

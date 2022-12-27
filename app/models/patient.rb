@@ -1,16 +1,18 @@
 class Patient < ApplicationRecord
+  has_many :appointments
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :appointments
+  include ApplicationHelper
   
-  validates_length_of :name, minimum: 2
-  validates_length_of :surname, minimum: 2
-  validates_length_of :residence, minimum: 8, maximum: 30
-  validates_length_of :password, minimum: 6, allow_blank: true
-  validates_length_of :password_confirmation, minimum: 6, allow_blank: true
+  validates :name, length: { minimum: 2 }
+  validates :surname, length: { minimum: 2 }
+  validates :residence, length: { minimum: 8, maximum: 30 }
+  validates :password, allow_blank: true, length: { minimum: 6 }
+  validates :password_confirmation, allow_blank: true, length: { minimum: 6 }
   validates :age, numericality: { less_than_or_equal_to: 100, only_integer: true }
-  validates :phone, uniqueness: true, format: { with: /\A\+?380[345679]\d{8}\z/, message: "Incorrectly entered phone number" }
+  validates :phone, uniqueness: true, format: { with: self::FORMAT_NUMBER_PHONE, message: "Incorrectly entered phone number" }
 
   def email_required?
     false

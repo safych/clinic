@@ -1,7 +1,7 @@
 <div style="margin-left: 1%">
   <h1>Add recommendation appointment</h1>
 
-  <%= form_with url: "/update/appointments", method: :put  do |form| %>
+  <%= form_with url: "/update/appointments", method: :post  do |form| %>
     <% invalid = @appointment.errors.include?(:recommendation) %>
     <div class="form-group w-25 p-3">
       <%= form.label :recommendation %>

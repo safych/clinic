@@ -12,9 +12,15 @@
   <% end %>
 
   <div>
-    <% doctors = Doctor.all.map { |doctor| ["#{doctor.surname} #{doctor.name} #{doctor.category.title}", doctor.id] } %>
+    <% all_doctors = @doctors.map { |doctor|
+                                  unless doctor.category_id.nil?
+                                    ["#{doctor.surname} #{doctor.name} #{doctor.category.title}", doctor.id]
+                                  else
+                                    nil
+                                  end
+                                } %>
     <%= form.label :doctor_id, style: "display: block" %>
-    <%= form.select :doctor_id, doctors %>
+    <%= form.select :doctor_id, all_doctors %>
   </div>
 
   <div>

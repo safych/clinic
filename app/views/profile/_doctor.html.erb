@@ -8,7 +8,7 @@
     <li>Category: <%= current_doctor.category.title %></li>
   </ul>
   <h2>Change password:</h2>
-  <%= form_with url: "/edit_password/doctor/#{current_doctor.id}", method: :post do |f| %>
+  <%= form_with url: "/update_password/doctor/#{current_doctor.id}", method: :post do |f| %>
     <div class="field">
       <%= f.label :password, "New password" %><br />
       <%= f.password_field :password %>
@@ -51,7 +51,7 @@
   <% end %>
   <h2>Change photo:</h2>
   <p>If you do not select a new photo, the old one will be deleted!</p>
-  <%= form_with url: "/edit_photo/doctor/#{current_doctor.id}", method: :post do |f| %>
+  <%= form_with url: "/update_photo/doctor/#{current_doctor.id}", method: :post do |f| %>
     <div>
       <%= f.label :avatar %><br />
       <%= f.file_field :avatar, direct_upload: true %>

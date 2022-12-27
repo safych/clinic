@@ -33,7 +33,11 @@
             <td><%= cl_image_tag doctor_avatar(doctor, 40), class: "w-25 p-3" %></td>
             <td><%= doctor.name %></td>
             <td><%= doctor.surname %></td>
-            <td><%= doctor.category.title %></td>
+            <% unless doctor.category.nil? %>
+              <td><%= doctor.category.title %></td>
+            <% else %>
+              <td></td>
+            <% end %>
             <td><%= doctor.phone %></td>
           </tr>
         <% end %>
