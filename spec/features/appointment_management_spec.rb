@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Appointment management", :type => :system do
+RSpec.describe "Appointment management", :type => :feature do
   before :each do
     create(:patient)
     create(:category)
@@ -8,7 +8,7 @@ RSpec.describe "Appointment management", :type => :system do
     create(:appointment)
   end
 
-  it "Doctor add recommendation for patient" do
+  it "doctor successfully adds a recommendation for patient" do
     visit "/"
 
     click_on "Log in"

@@ -70,8 +70,8 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
-  gem 'capistrano', '~> 3.17', require: false
-  gem 'capistrano-rails', '~> 1.6', require: false
+  gem 'capistrano', '~> 3.17'
+  gem 'capistrano-rails', '~> 1.6'
   gem 'capistrano-rvm', '~> 0.1.2'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
