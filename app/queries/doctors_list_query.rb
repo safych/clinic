@@ -1,9 +1,15 @@
-class DoctorsListQuery
+class DoctorsListQuery < ApplicationQuery
   def initialize(search_category, search_surname, page)
     @search_category = search_category
     @search_surname = search_surname
     @page = page
   end
+
+  def call
+    show
+  end
+
+  private
 
   def show
     if @search_category.present?

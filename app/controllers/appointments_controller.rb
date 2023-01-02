@@ -1,12 +1,10 @@
-require "byebug"
-
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[show destroy edit edit_recommendation]
   before_action :params_date_index, only: :index
   load_and_authorize_resource
 
   def index
-    @appointments = AppointmentsListQuery.new(current_user, params[:search_status], params[:page], params_date_index).show
+    @appointments = AppointmentsListQuery.call(current_user, params[:search_status], params[:page], params_date_index)
   end
 
   def show; end
@@ -17,11 +15,9 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    new_appointment = Appointment.new(appointment_params)
-    appointment = AppointmentsService.new(new_appointment, params[:appointment][:patient_id], 
-                                          params[:appointment][:doctor_id], nil, nil).create
+    check = AppointmentCreator.call(get_new_appointment)
 
-    if appointment
+    if check
       redirect_to appointments_path, notice: 'Appointment was successfully created.'
     else
       redirect_to appointments_path, status: :unprocessable_entity,
@@ -33,9 +29,9 @@ class AppointmentsController < ApplicationController
   def edit; end
 
   def edit_recommendation
-    appointment = AppointmentsService.new(nil, nil, nil, @appointment, params[:recommendation]).add_recommendation
+    check = AppointmentRecommendationUpdater.call(@appointment, params[:recommendation])
 
-    if appointment
+    if check
       redirect_to appointment_url(@appointment), notice: 'Appointment was successfully added to the recommendation.'
     else
       render :edit, status: :unprocessable_entity, locals: { appointment: @appointment }
@@ -61,5 +57,9 @@ class AppointmentsController < ApplicationController
 
   def appointment_params
     params.require(:appointment).permit(:doctor_id, :patient_id, :status, :recommendation, :date)
+  end
+
+  def get_new_appointment
+    Appointment.new(appointment_params)
   end
 end

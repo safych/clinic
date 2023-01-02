@@ -1,10 +1,16 @@
-class AppointmentsListQuery
+class AppointmentsListQuery < ApplicationQuery
   def initialize(current_user, search_status, page, date)
     @current_user = current_user
     @search_status = search_status
     @page = page
     @date = date
   end
+
+  def call
+    show
+  end
+
+  private
 
   def show
     if @current_user.instance_of?(::Patient)

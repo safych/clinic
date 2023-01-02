@@ -14,10 +14,12 @@ Rails.application.routes.draw do
     post "/update_photo/doctor/:id", to: "doctors#update_photo"
     post "/update/doctor/:id", to: "doctors#update"
   end
+
   devise_for :patients, controllers: { registrations: "patients/registrations", sessions: "patients/sessions" }
   devise_scope :patients do
     post "/update/patient/:id", to: "patients#update"
   end
+  
   resources :appointments
   post "/update/appointments", to: "appointments#edit_recommendation"
   get "/profile", to: "profile#index"

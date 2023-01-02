@@ -2,10 +2,10 @@ class PatientsController < ApplicationController
   load_and_authorize_resource
 
   def update
-    patient = Patient.find_by(id: params[:id])
-    if !patient.nil?
-      patient.update(name: params[:name], surname: params[:surname], phone: params[:phone], 
-                     age: params[:age], gender: params[:gender], residence: params[:residence])
+    check = PatientUpdater.call(params[:id], params[:name], params[:surname], params[:phone], params[:age], 
+                                params[:gender], params[:residence])
+
+    if check
       redirect_to profile_path
       return
     else
