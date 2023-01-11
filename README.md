@@ -1,8 +1,9 @@
 # README
-Description application
-* This application was created to automate the appointment of a patient to a doctor.
+## Description application
+---
+This application was created to automate the appointment of a patient to a doctor.
 
-The setups steps expect following tools installed on the system
+## The setups steps expect following tools installed on the system
 * Ruby 3.0.0
 * Rails 7.0.4
 * PostgreSQL
@@ -32,8 +33,8 @@ If you want to run the application locally:
 7) To stop the rails server
 * Ctrl+C
 
-If you managed to successfully launch the project locally, you can try to deploy it to the server.
-Before deploying, make sure that everything you need is on the server and that a user has been created in Postgres!!!
+## If you managed to successfully launch the project locally, you can try to deploy it to the server.
+### Before deploying, make sure that everything you need is on the server and that a user has been created in Postgres
 1) Enter the command
 * cap production deploy
 After the deployment, do not forget to create an .env file in the clinic folder!!!

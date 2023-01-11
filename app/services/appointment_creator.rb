@@ -23,7 +23,7 @@ class AppointmentCreator < ApplicationService
   end
 
   def verification_date
-    Appointment.find_by(patient_id: @new_appointment.patient_id, date: @new_appointment.date, 
+    Appointment.find_by(patient_id: @new_appointment.patient_id, date: @new_appointment.date,
                         doctor_id: @new_appointment.doctor_id)
   end
 end

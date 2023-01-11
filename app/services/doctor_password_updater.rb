@@ -15,14 +15,13 @@ class DoctorPasswordUpdater < ApplicationService
     if !@doctor.nil? && check_password
       password = BCrypt::Password.create(@password)
       @doctor.update(encrypted_password: password)
-      true
     else
       false
     end
   end
 
   def check_password
-    if @password.to_s.length > 5 && @password === @password_confirmation
+    if @password.to_s.length > 5 && @password == @password_confirmation
       true
     else
       false

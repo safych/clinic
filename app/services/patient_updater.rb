@@ -19,7 +19,6 @@ class PatientUpdater < ApplicationService
     patient = Patient.find_by(id: @id)
     if !patient.nil?
       patient.update(name: @name, surname: @surname, phone: @phone, age: @age, gender: @gender, residence: @residence)
-      true
     else
       false
     end

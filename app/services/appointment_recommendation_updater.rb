@@ -1,7 +1,7 @@
 class AppointmentRecommendationUpdater < ApplicationService
-  def initialize(appointment, recomendation)
+  def initialize(appointment, recommendation)
     @appointment = appointment
-    @recomendation = recomendation
+    @recommendation = recommendation
   end
 
   def call
@@ -11,10 +11,6 @@ class AppointmentRecommendationUpdater < ApplicationService
   private
 
   def add_recommendation
-    if @appointment.update(recommendation: @recommendation, status: 'done')
-      true
-    else
-      false
-    end
+    @appointment.update(recommendation: @recommendation, status: 'done')
   end
 end

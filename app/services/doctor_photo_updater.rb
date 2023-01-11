@@ -13,7 +13,6 @@ class DoctorPhotoUpdater < ApplicationService
   def update_photo
     if !@doctor.nil?
       @doctor.avatar.attach(@avatar)
-      true
     else
       false
     end

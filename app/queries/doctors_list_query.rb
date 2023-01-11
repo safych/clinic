@@ -1,25 +1,27 @@
-class DoctorsListQuery < ApplicationQuery
+class DoctorsListQuery
   def initialize(search_category, search_surname, page)
     @search_category = search_category
     @search_surname = search_surname
     @page = page
   end
 
-  def call
-    show
+  def sort
+    if @search_category.present?
+      sort_by_category
+    elsif @search_surname.present?
+      sort_by_surname
+    else
+      Doctor.where.not(category_id: nil).order('surname ASC').page @page
+    end
   end
 
-  private
+  def sort_by_category
+    Doctor.where(category_id: @search_category).where.not(category_id: nil)
+          .order('surname ASC').page @page
+  end
 
-  def show
-    if @search_category.present?
-      @doctors = Doctor.where(category_id: @search_category).where.not(category_id: nil)
-                       .order('surname ASC').page @page
-    elsif @search_surname.present?
-      @doctors = Doctor.where(surname: @search_category).where.not(category_id: nil)
-                       .order('name ASC').page @page
-    else
-      @doctors = Doctor.where.not(category_id: nil).order('surname ASC').page @page
-    end
+  def sort_by_surname
+    Doctor.where(surname: @search_surname).where.not(category_id: nil)
+          .order('name ASC').page @page
   end
 end

@@ -1,16 +1,16 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  protect_from_forgery 
+  protect_from_forgery
   check_authorization unless: :devise_controller?
   before_action :set_locale
 
   def configure_permitted_parameters
-    update_attrs = [:password, :password_confirmation, :current_password]
+    update_attrs = %i[password password_confirmation current_password]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
 
   private
-  
+
   def set_locale
     I18n.locale = params[:locale] || session[:locale] || I18n.default_locale
     session[:locale] = I18n.locale

@@ -16,7 +16,6 @@ class DoctorUpdater < ApplicationService
   def update_doctor
     if !@doctor.nil?
       @doctor.update(category_id: @category_id, phone: @phone, name: @name, surname: @surname)
-      true
     else
       false
     end
