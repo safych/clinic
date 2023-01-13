@@ -24,6 +24,7 @@ FactoryBot.define do
   end
 
   factory :appointment do
+    id { '1' }
     doctor_id { '1' }
     patient_id { '1' }
     status { 'wait' }
