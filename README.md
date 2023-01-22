@@ -37,7 +37,6 @@ If you want to run the application locally:
 ### Before deploying, make sure that everything you need is on the server and that a user has been created in Postgres
 1) Enter the command
 * cap production deploy
-After the deployment, do not forget to create an .env file in the clinic folder!!!
 2) Enter the commands for database
 * rake db:create RAILS_ENV=production
 * rake db:migrate RAILS_ENV=production

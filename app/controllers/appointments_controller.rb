@@ -14,14 +14,13 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    creating = AppointmentCreator.call(Appointment.new(appointment_params))
+    creating = AppointmentCreator.call(appointment_params)
 
-    if creating
-      redirect_to appointments_path, notice: 'Appointment was successfully created.'
+    if creating.status
+      redirect_to appointments_path, notice: creating.notice
     else
       redirect_to appointments_path, status: :unprocessable_entity,
-                                     notice: "Appointment wasn't successfully created. Because the doctor has no more
-                                     places for today or you have already booked an appointment."
+                                     notice: creating.notice
     end
   end
 
@@ -30,10 +29,10 @@ class AppointmentsController < ApplicationController
   def edit_recommendation
     updating = AppointmentRecommendationUpdater.call(appointment, params[:recommendation])
 
-    if updating
-      redirect_to appointment_url(appointment), notice: 'Appointment was successfully added to the recommendation.'
+    if updating.status
+      redirect_to appointment_url(appointment), notice: updating.notice
     else
-      render :edit, status: :unprocessable_entity, locals: { appointment: appointment }
+      render :edit, status: :unprocessable_entity, locals: { appointment: appointment }, notice: updating.notice
     end
   end
 
@@ -45,7 +44,7 @@ class AppointmentsController < ApplicationController
   private
 
   def params_date_index
-    return unless params['search_date(1i)'].present?
+    return if params['search_date(1i)'].nil?
 
     Date.new(params['search_date(1i)'].to_i, params['search_date(2i)'].to_i, params['search_date(3i)'].to_i)
   end

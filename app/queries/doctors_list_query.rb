@@ -6,13 +6,10 @@ class DoctorsListQuery
   end
 
   def sort
-    if @search_category.present?
-      sort_by_category
-    elsif @search_surname.present?
-      sort_by_surname
-    else
-      Doctor.where.not(category_id: nil).order('surname ASC').page @page
-    end
+    return sort_by_category if @search_category.present?
+    return sort_by_surname if @search_surname.present?
+
+    Doctor.where.not(category_id: nil).order('surname ASC').page @page
   end
 
   def sort_by_category

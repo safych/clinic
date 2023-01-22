@@ -7,32 +7,32 @@ class DoctorsController < ApplicationController
   end
 
   def update_password
-    check = DoctorPasswordUpdater.call(doctor, params[:password], params[:password_confirmation])
+    updating = DoctorPasswordUpdater.call(doctor, params[:password], params[:password_confirmation])
 
-    if check
-      redirect_to new_doctor_session_path, notice: 'Doctor password was successfully updated.'
+    if updating.status
+      redirect_to new_doctor_session_path, notice: updating.notice
     else
-      redirect_to profile_path, status: :unprocessable_entity, notice: "Doctor password wasn't successfully updated."
+      redirect_to profile_path, status: :unprocessable_entity, notice: updating.notice
     end
   end
 
   def update_photo
-    check = DoctorPhotoUpdater.call(doctor, params[:avatar])
+    updating = DoctorPhotoUpdater.call(doctor, params[:avatar])
 
-    if check
-      redirect_to profile_path, notice: 'Doctor avatar was successfully updated.'
+    if updating.status
+      redirect_to profile_path, notice: updating.notice
     else
-      redirect_to profile_doctor_path, status: :unprocessable_entity
+      redirect_to profile_doctor_path, status: :unprocessable_entity, notice: updating.notice
     end
   end
 
   def update
-    check = DoctorUpdater.call(doctor, params[:category_id], params[:phone], params[:name], params[:surname])
+    updating = DoctorUpdater.call(@doctor, params[:category_id], params[:phone], params[:name], params[:surname])
 
-    if check
-      redirect_to profile_path, notice: 'Doctor was successfully updated.'
+    if updating.status
+      redirect_to profile_path, notice: updating.notice
     else
-      redirect_to profile_doctor_path, status: :unprocessable_entity
+      redirect_to profile_doctor_path, status: :unprocessable_entity, notice: updating.notice
     end
   end
 

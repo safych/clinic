@@ -8,3 +8,37 @@ uk:
     appointments_doctor: "Прийоми пацієнтів"
     log_in: "Авторизуватися"
     log_out: "Вийти"
+
+  services:
+    appointment_creator:
+      count_error: "У лікаря на сьогодні немає місць"
+      already_exist_error: "Ви вже записані до даного лікаря на даний день"
+      successful_save: "Запис до лікаря успішно створено"
+      not_successful_save: "Запис до лікаря не створено"
+
+    appointment_recommendation_updater:
+      error_recommendation: "Рекомендація коротка менше 5 символів"
+      successful_update: "Рекомендацію успішно додано до запису"
+      not_successful_update: "Рекомендацію не додано до запису"
+    
+    doctor_password_updater:
+      error_length_password: "Пароль занадто короткий"
+      error_pwd_confirmation: "Новий пароль та пароль підтвердження не однакові"
+      error_search_doctor: "Лікаря не знайдено"
+      successful_update: "Пароль лікаря успішно оновлено"
+      not_successful_update: "Пароль лікаря не оновлено"
+    
+    doctor_photo_updater:
+      error_search_doctor: "Лікаря не знайдено"
+      successful_update: "Фото лікаря успішно оновлено"
+      not_successful_update: "Фото лікаря не оновлено"
+    
+    doctor_updater:
+      error_search_doctor: "Лікаря не знайдено"
+      successful_update: "Дані лікаря успішно оновлено"
+      not_successful_update: "Дані лікаря не оновлено"
+    
+    patient_updater:
+      error_search_patient: "Пацієнта не знайдено"
+      successful_update: "Дані пацієнта успішно оновлено"
+      not_successful_update: "Дані пацієнта не оновлено"

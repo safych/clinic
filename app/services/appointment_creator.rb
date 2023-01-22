@@ -1,6 +1,6 @@
 class AppointmentCreator < ApplicationService
-  def initialize(new_appointment)
-    @new_appointment = new_appointment
+  def initialize(params)
+    @params = params
   end
 
   def call
@@ -10,20 +10,36 @@ class AppointmentCreator < ApplicationService
   private
 
   def create_appointment
-    if count_appointments.length < 11 && verification_date.nil?
-      @new_appointment.save
-      true
-    else
-      false
-    end
+    return count_error if count_appointments.length > 10
+    return already_exist_error if already_booked
+    return successful_save if new_appointment.save
+
+    ServiceStatus.new(false, I18n.t('services.appointment_creator.not_successful_save'))
+  end
+
+  def new_appointment
+    Appointment.new(doctor_id: @params.doctor_id, patient_id: @params.patient_id, status: @params.status,
+                    recommendation: nil, date: @params.date)
   end
 
   def count_appointments
-    Appointment.where(doctor_id: @new_appointment.doctor_id, date: @new_appointment.date, status: 'wait')
+    Appointment.where(doctor_id: @params.doctor_id, date: @params.date)
   end
 
-  def verification_date
-    Appointment.find_by(patient_id: @new_appointment.patient_id, date: @new_appointment.date,
-                        doctor_id: @new_appointment.doctor_id)
+  def count_error
+    ServiceStatus.new(false, I18n.t('services.appointment_creator.count_error'))
+  end
+
+  def already_booked
+    Appointment.exists?(patient_id: @params.patient_id, date: @params.date,
+                        doctor_id: @params.doctor_id)
+  end
+
+  def already_exist_error
+    ServiceStatus.new(false, I18n.t('services.appointment_creator.already_exist_error'))
+  end
+
+  def successful_save
+    ServiceStatus.new(true, I18n.t('services.appointment_creator.successful_save'))
   end
 end

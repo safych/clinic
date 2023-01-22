@@ -11,10 +11,21 @@ class DoctorPhotoUpdater < ApplicationService
   private
 
   def update_photo
-    if !@doctor.nil?
-      @doctor.avatar.attach(@avatar)
-    else
-      false
-    end
+    return error_search_doctor if search_doctor.nil?
+    return successful_update if @doctor.avatar.attach(@avatar)
+
+    ServiceStatus.new(false, I18n.t('services.doctor_photo_updater.not_successful_update'))
+  end
+
+  def search_doctor
+    Doctor.find_by(id: @doctor.id, phone: @doctor.phone)
+  end
+
+  def error_search_doctor
+    ServiceStatus.new(false, I18n.t('services.doctor_photo_updater.error_search_doctor'))
+  end
+
+  def successful_update
+    ServiceStatus.new(true, I18n.t('services.doctor_photo_updater.successful_update'))
   end
 end

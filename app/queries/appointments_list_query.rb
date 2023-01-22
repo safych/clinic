@@ -7,21 +7,15 @@ class AppointmentsListQuery
   end
 
   def sort
-    if @current_user.instance_of?(::Patient)
-      sort_patient_appointments
-    elsif @current_user.instance_of?(::Doctor)
-      sort_doctor_appointments
-    end
+    return sort_patient_appointments if @current_user.instance_of?(::Patient)
+    return sort_doctor_appointments if @current_user.instance_of?(::Doctor)
   end
 
   def sort_patient_appointments
-    if @search_status.present?
-      sort_patient_appointments_by_status
-    elsif @date.present?
-      sort_patient_appointments_by_date
-    else
-      Appointment.where(patient_id: @current_user.id).order('id DESC').page @page
-    end
+    return sort_patient_appointments_by_status if @search_status.present?
+    return sort_patient_appointments_by_date if @date.present?
+
+    Appointment.where(patient_id: @current_user.id).order('id DESC').page @page
   end
 
   def sort_patient_appointments_by_status
@@ -34,13 +28,10 @@ class AppointmentsListQuery
   end
 
   def sort_doctor_appointments
-    if @search_status.present?
-      sort_doctor_appointments_by_status
-    elsif @date.present?
-      sort_doctor_appointments_by_date
-    else
-      Appointment.where(doctor_id: @current_user.id).order('id DESC').page @page
-    end
+    return sort_doctor_appointments_by_status if @search_status.present?
+    return sort_doctor_appointments_by_date if @date.present?
+
+    Appointment.where(doctor_id: @current_user.id).order('id DESC').page @page
   end
 
   def sort_doctor_appointments_by_status

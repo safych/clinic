@@ -7,3 +7,37 @@ en:
     appointments: "Appointments"
     log_in: "Log in"
     log_out: "Log out"
+
+  services:
+    appointment_creator:
+      count_error: "The doctor has no more places for today"
+      already_exist_error: "You are currently registered with this doctor"
+      successful_save: "Appointment was successfully created"
+      not_successful_save: "Appointment was not created"
+    
+    appointment_recommendation_updater:
+      error_recommendation: "Short recommendation is less than 5 characters"
+      successful_update: "Appointment was successfully added to the recommendation"
+      not_successful_update: "Appointment was not added to the recommendation"
+    
+    doctor_password_updater:
+      error_length_password: "The password is too short"
+      error_pwd_confirmation: "The entered passwords do not equal password confirm"
+      error_search_doctor: "This doctor was not found"
+      successful_update: "Doctor password was successfully updated"
+      not_successful_update: "Doctor password was not updated"
+    
+    doctor_photo_updater:
+      error_search_doctor: "This doctor was not found"
+      successful_update: "The photo of the doctor has been successfully updated"
+      not_successful_update: "The photo of the doctor has not been updated"
+    
+    doctor_updater:
+      error_search_doctor: "This doctor was not found"
+      successful_update: "The doctor's data has been successfully updated"
+      not_successful_update: "Doctor data has not been updated"
+    
+    patient_updater:
+      error_search_patient: "This patient was not found"
+      successful_update: "The patient's data has been successfully updated"
+      not_successful_update: "Patient data has not been updated"
