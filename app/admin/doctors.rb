@@ -1,6 +1,6 @@
 ActiveAdmin.register Doctor do
   controller.skip_authorization_check
-  
+
   controller do
     def create
       @doctor = Doctor.new(doctor_params)
@@ -26,9 +26,9 @@ ActiveAdmin.register Doctor do
         head 406
       end
     end
-    
+
     private
-  
+
     def doctor_params
       params.require(:doctor).permit(:category_id, :avatar, :name, :surname, :phone, :password, :password_confirmation)
     end
@@ -40,15 +40,14 @@ ActiveAdmin.register Doctor do
     column :phone
     column :name
     column :surname
-    column "Category" do |c|
+    column 'Category' do |c|
       Category.find(c.category_id).title unless c.category_id.nil?
     end
     actions
   end
 
-
   permit_params :category_id, :email, :avatar, :phone, :name, :surname, :encrypted_password, :reset_password_token, 
                 :reset_password_sent_at, :remember_created_at
 
-  form partial: "form"
+  form partial: 'form'
 end

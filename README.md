@@ -1,11 +1,10 @@
-## Table of contents
-* [General info](#general-info)
+## Clinic
+This application was created to automate the appointment of a patient to a doctor.
+
+### Table of contents
 * [Requirment](#requirment)
 * [Setup](#setup)
 * [Deploy](#deploy)
-
-## General info
-This application was created to automate the appointment of a patient to a doctor.
 
 ## Requirment
 * Ruby 3.0.0
@@ -16,7 +15,7 @@ This application was created to automate the appointment of a patient to a docto
 * NPM 8.19.2
 * Yarn 1.22.19
 
-## Setup:
+## Setup
 1) Download the application to your device
 ```
 $ git clone git@github.com:safych/clinic.git

@@ -1,3 +1,5 @@
+require 'byebug'
+
 class AppointmentsListQuery
   def initialize(current_user, search_status, page, date)
     @current_user = current_user
@@ -6,7 +8,7 @@ class AppointmentsListQuery
     @date = date
   end
 
-  def sort
+  def list
     return sort_patient_appointments if @current_user.instance_of?(::Patient)
     return sort_doctor_appointments if @current_user.instance_of?(::Doctor)
   end
@@ -19,12 +21,11 @@ class AppointmentsListQuery
   end
 
   def sort_patient_appointments_by_status
-    Appointment.where(patient_id: @current_user.id, status: @search_status)
-               .order('id DESC').page @page
+    Appointment.where(patient_id: @current_user.id, status: @search_status).order('id DESC').page @page
   end
 
   def sort_patient_appointments_by_date
-    Appointment.where(patient_id: @current_user.id, date: @date.to_fs(:iso8601)).page @page
+    Appointment.where(patient_id: @current_user.id, date: @date).page @page
   end
 
   def sort_doctor_appointments
@@ -39,6 +40,6 @@ class AppointmentsListQuery
   end
 
   def sort_doctor_appointments_by_date
-    Appointment.where(doctor_id: @current_user.id, date: @date.to_fs(:iso8601)).page @page
+    Appointment.where(doctor_id: @current_user.id, date: @date).page @page
   end
 end

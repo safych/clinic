@@ -5,4 +5,8 @@ class ServiceStatus
     @status = status
     @notice = notice
   end
+
+  def success?
+    @status
+  end
 end

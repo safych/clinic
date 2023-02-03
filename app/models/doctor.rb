@@ -13,7 +13,8 @@ class Doctor < ApplicationRecord
   validates :encrypted_password, allow_blank: true, length: { minimum: 6 }
   validates :password, allow_blank: true, length: { minimum: 6 }
   validates :password_confirmation, allow_blank: true, length: { minimum: 6 }
-  validates :phone, uniqueness: true, format: { with: self::FORMAT_NUMBER_PHONE, message: "Incorrectly entered phone number" }
+  validates :phone, format: { with: self::FORMAT_NUMBER_PHONE, message: I18n.t('models.validates_phone'),
+                              uniqueness: true }
 
   paginates_per 5
 

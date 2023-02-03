@@ -1,22 +1,25 @@
 class AppointmentsController < ApplicationController
+  check_authorization unless: :devise_controller?
   load_and_authorize_resource
 
   def index
     @appointments = AppointmentsListQuery.new(current_user, params[:search_status], params[:page],
-                                              params_date_index).sort
+                                              params_date_index).list
   end
 
   def show; end
 
   def new
     @appointment = Appointment.new
-    @doctors = Doctor.where.not(category_id: nil)
+    @doctors = Doctor.all
   end
+
+  def edit; end
 
   def create
     creating = AppointmentCreator.call(appointment_params)
 
-    if creating.status
+    if creating.success?
       redirect_to appointments_path, notice: creating.notice
     else
       redirect_to appointments_path, status: :unprocessable_entity,
@@ -24,12 +27,10 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  def edit; end
-
-  def edit_recommendation
+  def update
     updating = AppointmentRecommendationUpdater.call(appointment, params[:recommendation])
 
-    if updating.status
+    if updating.success?
       redirect_to appointment_url(appointment), notice: updating.notice
     else
       render :edit, status: :unprocessable_entity, locals: { appointment: appointment }, notice: updating.notice
@@ -37,8 +38,8 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
-    appointment.destroy
-    redirect_to appointments_url, notice: 'Appointment was successfully destroyed.'
+    appointment.destroy!
+    redirect_to appointments_url, notice: I18n.t('controllers.appointments.successful_destroy')
   end
 
   private
@@ -47,6 +48,7 @@ class AppointmentsController < ApplicationController
     return if params['search_date(1i)'].nil?
 
     Date.new(params['search_date(1i)'].to_i, params['search_date(2i)'].to_i, params['search_date(3i)'].to_i)
+        .to_fs(:iso8601)
   end
 
   def appointment

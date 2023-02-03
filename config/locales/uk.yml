@@ -9,6 +9,10 @@ uk:
     log_in: "Авторизуватися"
     log_out: "Вийти"
 
+  controllers:
+    appointments:
+      successful_destroy: "Запис до лікаря успішно видалено"
+
   services:
     appointment_creator:
       count_error: "У лікаря на сьогодні немає місць"
@@ -42,3 +46,7 @@ uk:
       error_search_patient: "Пацієнта не знайдено"
       successful_update: "Дані пацієнта успішно оновлено"
       not_successful_update: "Дані пацієнта не оновлено"
+
+  models:
+    patient:
+     validates_phone: "Невірно введений номер телефону"

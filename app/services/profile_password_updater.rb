@@ -1,6 +1,4 @@
-require 'byebug'
-
-class DoctorPasswordUpdater < ApplicationService
+class ProfilePasswordUpdater < ApplicationService
   def initialize(doctor, password, password_confirmation)
     @doctor = doctor
     @password = password

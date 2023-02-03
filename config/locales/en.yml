@@ -8,6 +8,10 @@ en:
     log_in: "Log in"
     log_out: "Log out"
 
+  controllers:
+    appointments:
+      successful_destroy: "Appointment was successfully destroyed"
+
   services:
     appointment_creator:
       count_error: "The doctor has no more places for today"
@@ -41,3 +45,6 @@ en:
       error_search_patient: "This patient was not found"
       successful_update: "The patient's data has been successfully updated"
       not_successful_update: "Patient data has not been updated"
+
+  models:
+    validates_phone: "Incorrectly entered phone number"

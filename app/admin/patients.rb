@@ -20,7 +20,7 @@ ActiveAdmin.register Patient do
   permit_params :email, :phone, :encrypted_password, :name, :surname, :age, :gender, :residence, :reset_password_token, 
                 :reset_password_sent_at, :remember_created_at
   
-  form partial: "form"
+  form partial: 'form'
 
   index do
     selectable_column

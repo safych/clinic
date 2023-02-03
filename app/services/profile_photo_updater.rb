@@ -1,4 +1,4 @@
-class DoctorPhotoUpdater < ApplicationService
+class ProfilePhotoUpdater < ApplicationService
   def initialize(doctor, avatar)
     @doctor = doctor
     @avatar = avatar
