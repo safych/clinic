@@ -1,28 +1,28 @@
 <div style="margin-left: 1%">
   <p style="color: green"><%= notice %></p>
-  <h3>Search by surname</h3>
+  <h3><%= t('doctor.index.search_by_surname') %></h3>
   <%= form_with url: "/doctors/", method: :get do |f| %>
     <%= f.label :search_surname, style: "display: block" %>
     <%= f.text_field :search_surname %>
     <br>
-    <%= f.submit 'Search by surname' %>
+    <%= f.submit t('doctor.index.search_by_surname') %>
   <% end %>
-  <h3>Search by category</h3>
+  <h3><%= t('doctor.index.search_by_category') %></h3>
   <%= form_with url: "/doctors/", method: :get do |f| %>
     <%= f.label :search_category, style: "display: block" %>
     <%= f.select(:search_category, Category.all.collect { |category| [category.title, category.id] }) %>
     <br>
-    <%= f.submit 'Search by category' %>
+    <%= f.submit t('doctor.index.search_by_category') %>
   <% end %>
-  <h1>Doctors</h1>
+  <h1><%= t('doctor.index.doctors') %></h1>
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Photo</th>
-        <th scope="col">Name</th>
-        <th scope="col">Surname</th>
-        <th scope="col">Category</th>
-        <th scope="col">Phone</th>
+        <th scope="col"><%= t('doctor.index.photo') %></th>
+        <th scope="col"><%= t('doctor.index.name') %></th>
+        <th scope="col"><%= t('doctor.index.surname') %></th>
+        <th scope="col"><%= t('doctor.index.category') %></th>
+        <th scope="col"><%= t('doctor.index.phone') %></th>
       </tr>
       </thead>
       <tbody>
@@ -42,7 +42,7 @@
           </tr>
         <% end %>
       <% else %>
-        <p>Not found doctors</p>
+        <p><%= t('doctor.index.not_found') %></p>
       <% end %>
       </tbody>
   </table>

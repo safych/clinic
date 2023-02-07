@@ -8,6 +8,113 @@ en:
     log_in: "Log in"
     log_out: "Log out"
 
+  registration:
+    phone: "Phone"
+    name: "Name"
+    surname: "Surname"
+    age: "Age"
+    gender: "Gender"
+    man: "I'm a man"
+    women: "I'm a women"
+    residence: "Residence"
+    password: "Password"
+    password_confirm: "Password confirm"
+    sign_up: "Sign up"
+
+  session:
+    doctor_log_in: "Doctor Log in"
+    patient_log_in: "Patient Log in"
+    phone: "Phone"
+    password: "Password"
+    remember_me: "Remember me"
+    log_in: "Log in"
+
+  appointment:
+    index:
+      search_by_date: "Search by date"
+      search_by_status: "Search by status"
+      new_appointment: "New appointment"
+      photo: "Photo"
+      doctor: "Doctor"
+      status: "Status"
+      date: "Date"
+      deteils: "Deteils"
+      show_appointment: "Show this appointment"
+      patient: "Patient"
+      not_authorized: "You are not authorized!!!"
+      doctor_appointments: "Doctor appointments:"
+      patient_appointments: "Patient appointments:"
+
+  patient:
+    links:
+      new_session: "Log in"
+      new_registration: "Sign up"
+      new_doctor_session: "Are you a doctor?"
+      new_confirmation: "Didn't receive confirmation instructions?"
+      new_unlock: "Didn't receive unlock instructions?"
+
+  doctor:
+    index:
+      search_by_surname: "Search by surname"
+      search_by_category: "Search by category"
+      photo: "Photo"
+      name: "Name"
+      surname: "Surname"
+      category: "Category"
+      phone: "Phone"
+      not_found: "Not found doctors"
+      doctors: "Doctors"
+
+    links:
+      new_session: "Log in"
+      new_confirmation: "Didn't receive confirmation instructions?"
+      new_unlock: "Didn't receive unlock instructions?"
+
+  profile:
+    doctor:
+      doctor_info: "Doctor info:"
+      name: "Name:"
+      surname: "Surname:"
+      phone: "Phone:"
+      category: "Category:"
+      update_password: "Update password"
+      new_password: "New password"
+      new_password_confirm: "Confirm new password"
+      edit_category: "Category"
+      edit_phone: "Phone"
+      edit_name: "Name"
+      edit_surname: "Surname"
+      update: "Update"
+      change_data: "Change data:"
+      change_photo: "Change photo:"
+      avatar: "Photo"
+      update_photo: "Update photo"
+      message_photo: "If you do not select a new photo, the old one will be deleted!"
+
+    patient:
+      patient_info: "Patient info:"
+      name: "Name:"
+      surname: "Surname:"
+      age: "Age:"
+      phone: "Phone:"
+      gender: "Gender:"
+      residence: "Residence:"
+      change_password: "Change password:"
+      change_data: "Change data:"
+      update_password: "Update password"
+      new_password: "New password"
+      new_password_confirm: "Confirm new password"
+      edit_phone: "Phone"
+      edit_name: "Name"
+      edit_surname: "Surname"
+      edit_age: "Age"
+      edit_gender: "Gender"
+      edit_residence: "Residence"
+      update: "Update"
+      man: "I'm a man"
+      women: "I'm a women"
+
+
   controllers:
     appointments:
       successful_destroy: "Appointment was successfully destroyed"
@@ -24,12 +131,11 @@ en:
       successful_update: "Appointment was successfully added to the recommendation"
       not_successful_update: "Appointment was not added to the recommendation"
     
-    doctor_password_updater:
+    password_updater:
       error_length_password: "The password is too short"
       error_pwd_confirmation: "The entered passwords do not equal password confirm"
-      error_search_doctor: "This doctor was not found"
-      successful_update: "Doctor password was successfully updated"
-      not_successful_update: "Doctor password was not updated"
+      successful_update: "User password was successfully updated"
+      not_successful_update: "User password was not updated"
     
     doctor_photo_updater:
       error_search_doctor: "This doctor was not found"

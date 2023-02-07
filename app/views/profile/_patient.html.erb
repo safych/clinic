@@ -1,52 +1,66 @@
 <div>
-  <h1>Patient info:</h1>
+  <h1><%= t('profile.patient.patient_info') %></h1>
   <ul>
-    <li>Name: <%= current_patient.name %></li>
-    <li>Surname: <%= current_patient.surname %></li>
-    <li>Age: <%= current_patient.age %></li>
-    <li>Phone: <%= current_patient.phone %></li>
-    <li>Gender: <%= current_patient.gender %></li>
-    <li>Residence: <%= current_patient.residence %></li>
+    <li><%= t('profile.patient.name') %> <%= current_patient.name %></li>
+    <li><%= t('profile.patient.surname') %> <%= current_patient.surname %></li>
+    <li><%= t('profile.patient.age') %> <%= current_patient.age %></li>
+    <li><%= t('profile.patient.phone') %> <%= current_patient.phone %></li>
+    <li><%= t('profile.patient.gender') %> <%= current_patient.gender %></li>
+    <li><%= t('profile.patient.residence') %> <%= current_patient.residence %></li>
   </ul>
-  <h2>Change password:</h2>
-  <%= link_to "Change your password", edit_patient_registration_path %>
-  <h2>Change data patient:</h2>
-  <%= form_with url: "/update/patient/#{current_patient.id}", method: :post do |f| %>
+  <h2><%= t('profile.patient.change_password') %></h2>
+  <%= form_with url: "/update_password", method: :post do |f| %>
     <div class="field">
-      <%= f.label :phone %><br />
+      <%= f.label :password, t('profile.patient.new_password') %><br />
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, t('profile.patient.new_password_conform') %><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div style="margin-top: .5%">
+      <%= f.submit t('profile.patient.update_password') %>
+    </div>
+  <% end %>
+  <h2><%= t('profile.patient.change_data') %></h2>
+  <%= form_with url: "/update", method: :post do |f| %>
+    <div class="field">
+      <%= f.label :phone, t('profile.patient.edit_phone') %><br />
       <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", placeholder: "+380*********", value: current_patient.phone %>
     </div>
 
     <div class="field">
-      <%= f.label :name %><br />
+      <%= f.label :name, t('profile.patient.edit_name') %><br />
       <%= f.text_field :name, autofocus: true, autocomplete: "name", value: current_patient.name %>
     </div>
 
     <div class="field">
-      <%= f.label :surname %><br />
+      <%= f.label :surname, t('profile.patient.edit_surname') %><br />
       <%= f.text_field :surname, autofocus: true, autocomplete: "surname", value: current_patient.surname %>
     </div>
 
     <div class="field">
-      <%= f.label :age %><br />
+      <%= f.label :age, t('profile.patient.edit_age') %><br />
       <%= f.number_field :age, autofocus: true, autocomplete: "age", value: current_patient.age %>
     </div>
 
     <div class="field">
-      <%= f.label :gender %><br />
+      <%= f.label :gender, t('profile.patient.edit_gender') %><br />
       <%= radio_button_tag(:gender, "man") %>
-        <%= label_tag(:gender_man, "I'm a man") %>
+        <%= label_tag(:gender_man, t('profile.patient.man')) %>
       <%= radio_button_tag(:gender, "women") %>
-        <%= label_tag(:gender_women, "I'm a women") %>
+        <%= label_tag(:gender_women, t('profile.patient.women')) %>
     </div>
 
     <div class="field">
-      <%= f.label :residence %><br />
+      <%= f.label :residence, t('profile.patient.edit_residence') %><br />
       <%= f.text_field :residence, autofocus: true, autocomplete: "residence", value: current_patient.residence %>
     </div>
 
     <div style="margin-top: .5%">
-      <%= f.submit "Update" %>
+      <%= f.submit t('profile.patient.update') %>
     </div>
   <% end %>
   <% flash.each do |type, msg| %>

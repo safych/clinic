@@ -1,13 +1,13 @@
 <div style="margin-left: 1%">
   <p style="color: green"><%= notice %></p>
-  <h3>Search by date</h3>
+  <h3><%= t('appointment.index.search_by_date') %></h3>
   <%= form_with url: "/appointments/", method: :get do |f| %>
     <%= f.label :search_date, style: "display: block" %>
     <%= f.date_select :search_date %>
     <br>
-    <%= submit_tag 'Search by date' %>
+    <%= submit_tag t('appointment.index.search_by_date') %>
   <% end %>
-  <h3>Search by status</h3>
+  <h3><%= t('appointment.index.search_by_status') %></h3>
   <%= form_with url: "/appointments/", method: :get do |f| %>
     <%= f.label :search_status, style: "display: block" %>
     <%= radio_button_tag(:search_status, "wait") %>
@@ -15,21 +15,21 @@
     <%= radio_button_tag(:search_status, "done") %>
       <%= label_tag(:status_done, "Done status") %>
     <br>
-    <%= submit_tag 'Search by status' %>
+    <%= submit_tag t('appointment.index.search_by_status') %>
   <% end %>
   <% if can? :create, Appointment %>
-    <%= link_to "New appointment", new_appointment_path %>
+    <%= link_to t('appointment.index.new_appointment'), new_appointment_path %>
   <% end %>
   <% if patient_signed_in? %>
-    <h1>Patient appointments:</h1>
+    <h1><%= t('appointment.index.patient_appointments') %></h1>
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Photo</th>
-          <th scope="col">Doctor</th>
-          <th scope="col">Status</th>
-          <th scope="col">Date</th>
-          <th scope="col">Deteils</th>
+          <th scope="col"><%= t('appointment.index.photo') %></th>
+          <th scope="col"><%= t('appointment.index.doctor') %></th>
+          <th scope="col"><%= t('appointment.index.status') %></th>
+          <th scope="col"><%= t('appointment.index.date') %></th>
+          <th scope="col"><%= t('appointment.index.deteils') %></th>
         </tr>
         </thead>
         <tbody>
@@ -41,20 +41,20 @@
                 </td>
                 <td><%= appointment.status %></td>
                 <td><%= appointment.date %></td>
-                <td><%= link_to "Show this appointment", appointment %></td>
+                <td><%= link_to t('appointment.index.show_appointment'), appointment %></td>
               </tr>
           <% end %>
         </tbody>
     </table>
   <% elsif doctor_signed_in? %>
-    <h1>Doctor appointments:</h1>
+    <h1><%= t('appointment.index.doctor_appointments') %></h1>
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Patient</th>
-          <th scope="col">Status</th>
-          <th scope="col">Date</th>
-          <th scope="col">Deteils</th>
+          <th scope="col"><%= t('appointment.index.patient') %></th>
+          <th scope="col"><%= t('appointment.index.status') %></th>
+          <th scope="col"><%= t('appointment.index.date') %></th>
+          <th scope="col"><%= t('appointment.index.deteils') %></th>
         </tr>
         </thead>
         <tbody>
@@ -66,14 +66,14 @@
                 </td>
                 <td><%= appointment.status %></td>
                 <td><%= appointment.date %></td>
-                <td><%= link_to "Show this appointment", appointment %></td>
+                <td><%= link_to t('appointment.index.show_appointment'), appointment %></td>
               </tr>
             <% end %>
           <% end %>
         </tbody>
     </table>
   <% else %>
-    <h1>You are not authorized!!!</h1>
+    <h1><%= t('appointment.index.not_authorized') %></h1>
   <% end %>
   <%= paginate @appointments %>
 </div>

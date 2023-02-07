@@ -1,26 +1,26 @@
 <div style="margin-left: 1%">
-  <h2>Doctor Log in</h2>
+  <h2><%= t('session.doctor_log_in') %></h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.label :phone %><br />
+      <%= f.label :phone, t('session.phone') %><br />
       <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", placeholder: "+380*********" %>
     </div>
 
     <div class="field">
-      <%= f.label :password %><br />
+      <%= f.label :password, t('session.password') %><br />
       <%= f.password_field :password, autocomplete: "current-password" %>
     </div>
 
     <% if devise_mapping.rememberable? %>
       <div class="field">
         <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <%= f.label :remember_me, t('session.remember_me') %>
       </div>
     <% end %>
 
     <div class="actions">
-      <%= f.submit "Log in" %>
+      <%= f.submit t('session.log_in') %>
     </div>
   <% end %>
 

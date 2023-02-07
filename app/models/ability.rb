@@ -12,12 +12,12 @@ class Ability
       can :manage, Appointment, doctor: user
       cannot :create, Appointment
       can :manage, Doctor, id: user.id
-      can :read, Profile
+      can :manage, Profile
     elsif user.instance_of?(::Patient)
       can :manage, Appointment, patient: user
       cannot :update, Appointment
       can :manage, Patient, id: user.id
-      can :read, Profile
+      can :manage, Profile
     end
   end
 end

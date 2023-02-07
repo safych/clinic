@@ -1,6 +1,5 @@
 <div style="margin-left: 1%">
   <h1>Add recommendation appointment</h1>
-  # TODO: Must to add form_for
   <%= form_for @appointment, method: :patch do |form| %>
     <% invalid = @appointment.errors.include?(:recommendation) %>
     <div class="form-group w-25 p-3">

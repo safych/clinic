@@ -9,6 +9,112 @@ uk:
     log_in: "Авторизуватися"
     log_out: "Вийти"
 
+  registration:
+    phone: "Номер телефону"
+    name: "Ім'я"
+    surname: "Прізвище"
+    age: "Вік"
+    gender: "Стать"
+    man: "Я чоловік"
+    women: "Я жінка"
+    residence: "Місце проживання"
+    password: "Пароль"
+    password_confirm: "Пароль підтвердження"
+    sign_up: "Зареєструватись"
+
+  session:
+    doctor_log_in: "Авторизація для лікаря"
+    patient_log_in: "Авторизація для пацієнта"
+    phone: "Номер телефону"
+    password: "Пароль"
+    remember_me: "Запам'ятати мене"
+    log_in: "Авторизуватись"
+
+  appointment:
+    index:
+      search_by_date: "Пошук за датою"
+      search_by_status: "Пошук за статусом"
+      new_appointment: "Новий запис до лікаря"
+      photo: "Фото"
+      doctor: "Лікар"
+      status: "Статус"
+      date: "Дата"
+      deteils: "Деталі"
+      show_appointment: "Переглянути запис"
+      patient: "Пацієнт"
+      not_authorized: "Ви не авторизований!!!"
+      doctor_appointments: "Записи лікаря:"
+      patient_appointments: "Записи пацієнта:"
+
+  patient:
+    links:
+      new_session: "Авторизуватись"
+      new_registration: "Зареєструватись"
+      new_doctor_session: "Ви лікар?"
+      new_confirmation: "Не отримав інструкцій щодо підтвердження?"
+      new_unlock: "Не отримав інструкції з розблокування?"
+
+  doctor:
+    index:
+      search_by_surname: "Пошук за прізвищем"
+      search_by_category: "Пошук за категорією"
+      photo: "Фото"
+      name: "Ім'я"
+      surname: "Прізвище"
+      category: "Категорія"
+      phone: "Номер телефону"
+      not_found: "Лікарів не знайдено"
+      doctors: "Лікарі"
+
+    links:
+      new_session: "Авторизуватись"
+      new_confirmation: "Не отримав інструкцій щодо підтвердження?"
+      new_unlock: "Не отримав інструкції з розблокування?"
+
+  profile:
+    doctor:
+      doctor_info: "Дані лікаря:"
+      name: "Ім'я:"
+      surname: "Прізвище:"
+      phone: "Номер телефону:"
+      category: "Категорія:"
+      update_password: "Оновлення пароля"
+      new_password: "Новий пароль"
+      new_password_confirm: "Повторно новий пароль"
+      edit_category: "Категорія"
+      edit_phone: "Номер телефону"
+      edit_name: "Ім'я"
+      edit_surname: "Прізвище"
+      update: "Оновити"
+      change_data: "Змінити дані:"
+      change_photo: "Змінити фото:"
+      avatar: "Фото"
+      update_photo: "Оновлення фото"
+      message_photo: "Якщо ви не виберете нове фото і натисните оновити, старе буде видалено!"
+
+    patient:
+      patient_info: "Дані пацієнта:"
+      name: "Ім'я:"
+      surname: "Прізвище:"
+      age: "Вік:"
+      phone: "Номер телефону:"
+      gender: "Стать:"
+      residence: "Місце проживання:"
+      change_password: "Змінити пароль:"
+      change_data: "Змінити дані:"
+      update_password: "Оновити пароль"
+      new_password: "Новий пароль"
+      new_password_confirm: "Повторно новий пароль"
+      edit_phone: "Номер телефону"
+      edit_name: "Ім'я"
+      edit_surname: "Прізвище"
+      edit_age: "Вік"
+      edit_gender: "Стать"
+      edit_residence: "Місце проживання"
+      update: "Оновити"
+      man: "Я чоловік"
+      women: "Я жінка"
+
   controllers:
     appointments:
       successful_destroy: "Запис до лікаря успішно видалено"
@@ -28,9 +134,8 @@ uk:
     doctor_password_updater:
       error_length_password: "Пароль занадто короткий"
       error_pwd_confirmation: "Новий пароль та пароль підтвердження не однакові"
-      error_search_doctor: "Лікаря не знайдено"
-      successful_update: "Пароль лікаря успішно оновлено"
-      not_successful_update: "Пароль лікаря не оновлено"
+      successful_update: "Пароль користувача успішно оновлено"
+      not_successful_update: "Пароль коричтувача не оновлено"
     
     doctor_photo_updater:
       error_search_doctor: "Лікаря не знайдено"

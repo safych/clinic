@@ -1,63 +1,63 @@
 <div>
-  <h1>Profile doctor</h1>
+  <h1><%= t('profile.doctor.doctor_info') %></h1>
   <ul>
-    <li>Name: <%= current_doctor.name %></li>
-    <li>Surname: <%= current_doctor.surname %></li>
-    <li>Phone: <%= current_doctor.phone %></li>
-    <li>Category: <%= current_doctor.category.title %></li>
+    <li><%= t('profile.doctor.name') %> <%= current_doctor.name %></li>
+    <li><%= t('profile.doctor.surname') %> <%= current_doctor.surname %></li>
+    <li><%= t('profile.doctor.phone') %> <%= current_doctor.phone %></li>
+    <li><%= t('profile.doctor.category') %> <%= current_doctor.category.title %></li>
   </ul>
-  <h2>Change password:</h2>
-  <%= form_with url: "/update_password/doctor/#{current_doctor.id}", method: :post do |f| %>
+  <h2><%= t('profile.doctor.change_password') %></h2>
+  <%= form_with url: "/update_password", method: :post do |f| %>
     <div class="field">
-      <%= f.label :password, "New password" %><br />
+      <%= f.label :password, t('profile.doctor.new_password') %><br />
       <%= f.password_field :password %>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation, "Confirm new password" %><br />
+      <%= f.label :password_confirmation, t('profile.doctor.new_password_conform') %><br />
       <%= f.password_field :password_confirmation %>
     </div>
 
     <div style="margin-top: .5%">
-      <%= f.submit "Update password" %>
+      <%= f.submit t('profile.doctor.update_password') %>
     </div>
   <% end %>
-  <h2>Change data:</h2>
-  <%= form_with url: "/update/doctor/#{current_doctor.id}", method: :post do |f| %>
+  <h2><%= t('profile.doctor.change_data') %></h2>
+  <%= form_with url: "/update", method: :post do |f| %>
     <div class="field">
-      <%= f.label :category_id %><br />
+      <%= f.label :category_id, t('profile.doctor.edit_category') %><br />
       <%= f.select(:category_id, Category.all.collect { |category| [category.title, category.id] }, selected: current_doctor.category_id) %>
     </div>
 
     <div class="field">
-      <%= f.label :name %><br />
+      <%= f.label :name, t('profile.doctor.edit_name') %><br />
       <%= f.text_field :name, autofocus: true, autocomplete: "name", value: current_doctor.name %>
     </div>
 
     <div class="field">
-      <%= f.label :surname %><br />
+      <%= f.label :surname, t('profile.doctor.edit_surname') %><br />
       <%= f.text_field :surname, autofocus: true, autocomplete: "surname", value: current_doctor.surname %>
     </div>
 
     <div class="field">
-      <%= f.label :phone %><br />
+      <%= f.label :phone, t('profile.doctor.edit_phone') %><br />
       <%= f.text_field :phone, autofocus: true, autocomplete: "phone", value: current_doctor.phone %>
     </div>
 
     <div style="margin-top: .5%">
-      <%= f.submit "Update data" %>
+      <%= f.submit t('profile.doctor.update') %>
     </div>
   <% end %>
-  <h2>Change photo:</h2>
-  <p>If you do not select a new photo, the old one will be deleted!</p>
-  <%= form_with url: "/update_photo/doctor/#{current_doctor.id}", method: :post do |f| %>
+  <h2><%= t('profile.doctor.change_photo') %></h2>
+  <p><%= t('profile.doctor.message_photo') %></p>
+  <%= form_with url: "/update_photo", method: :post do |f| %>
     <div>
-      <%= f.label :avatar %><br />
+      <%= f.label :avatar, t('profile.doctor.avatar') %><br />
       <%= f.file_field :avatar, direct_upload: true %>
     </div>
 
     <div style="margin-top: .5%">
-      <%= f.submit "Update photo" %>
+      <%= f.submit t('profile.doctor.update_photo') %>
     </div>
   <% end %>
   <% flash.each do |type, msg| %>
