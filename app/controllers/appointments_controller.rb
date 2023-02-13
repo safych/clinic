@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
 
   def index
     @appointments = AppointmentsListQuery.new(current_user, params[:search_status], params[:page],
-                                              params_date_index).list
+                                              params[:date]).list
   end
 
   def show; end
@@ -43,13 +43,6 @@ class AppointmentsController < ApplicationController
   end
 
   private
-
-  def params_date_index
-    return if params['search_date(1i)'].nil?
-
-    Date.new(params['search_date(1i)'].to_i, params['search_date(2i)'].to_i, params['search_date(3i)'].to_i)
-        .to_fs(:iso8601)
-  end
 
   def appointment
     @appointment ||= Appointment.find(params[:id])
