@@ -26,6 +26,6 @@ class AppointmentRecommendationUpdater < ApplicationService
   end
 
   def successful_update
-    ServiceStatus.new(true, I18n.t('services.appointment_recommendation_updater.successful_save'))
+    ServiceStatus.new(true, I18n.t('services.appointment_recommendation_updater.successful_update'))
   end
 end
