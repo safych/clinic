@@ -3,8 +3,7 @@ class AppointmentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @appointments = AppointmentsListQuery.new(current_user, params[:search_status], params[:page],
-                                              params[:date]).list
+    @appointments = AppointmentsListQuery.new(current_user, index_params).list
   end
 
   def show; end
@@ -17,7 +16,7 @@ class AppointmentsController < ApplicationController
   def edit; end
 
   def create
-    creating = AppointmentCreator.call(appointment_params)
+    creating = AppointmentCreatorService.new(appointment_params).create_appointment
 
     if creating.success?
       redirect_to appointments_path, notice: creating.notice
@@ -28,7 +27,7 @@ class AppointmentsController < ApplicationController
   end
 
   def update
-    updating = AppointmentRecommendationUpdater.call(appointment, params[:recommendation])
+    updating = AppointmentRecommendationUpdaterService.new(appointment, params[:recommendation]).add_recommendation
 
     if updating.success?
       redirect_to appointment_url(appointment), notice: updating.notice
@@ -43,6 +42,10 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
+  def index_params
+    params.permit(:status, :page, :date)
+  end
 
   def appointment
     @appointment ||= Appointment.find(params[:id])

@@ -1,22 +1,14 @@
 class DoctorsListQuery
-  def initialize(list_params)
-    @list_params = list_params
+  attr_reader :params
+
+  def initialize(params)
+    @params = params
   end
 
   def list
-    return sort_by_category if @list_params[:search_category].present?
-    return sort_by_surname if @list_params[:search_surname].present?
-
-    Doctor.where.not(category_id: nil).order('surname ASC').page @list_params[:page]
-  end
-
-  def sort_by_category
-    Doctor.where(category_id: @list_params[:search_category]).where.not(category_id: nil)
-          .order('surname ASC').page @list_params[:page]
-  end
-
-  def sort_by_surname
-    Doctor.where(surname: @list_params[:search_surname]).where.not(category_id: nil)
-          .order('name ASC').page @list_params[:page]
+    doctors = Doctor.order('surname ASC').page params[:page]
+    doctors = doctors.where(category_id: params[:category]).page params[:page] if params[:category].present?
+    doctors = doctors.where(surname: params[:surname]).page params[:page] if params[:surname].present?
+    doctors
   end
 end

@@ -1,20 +1,17 @@
-class AppointmentCreator < ApplicationService
+class AppointmentCreatorService
   def initialize(params)
     @params = params
   end
 
-  def call
-    create_appointment
-  end
-
-  private
-
   def create_appointment
-    return count_error if count_appointments.length > 10
-    return already_exist_error if already_booked
-    return successful_save if new_appointment.save
+    @service_status_error = ServiceStatus.new(false, [])
+    count_error if count_appointments.length > 10
+    already_exist_error if already_booked
+    return successful_save if new_appointment.save && @service_status_error.notice.empty?
 
-    ServiceStatus.new(false, I18n.t('services.appointment_creator.not_successful_save'))
+    @service_status_error.notice.push(I18n.t('services.appointment_creator.not_successful_save'),
+                                      new_appointment.errors.full_messages)
+    @service_status_error
   end
 
   def new_appointment
@@ -27,7 +24,7 @@ class AppointmentCreator < ApplicationService
   end
 
   def count_error
-    ServiceStatus.new(false, I18n.t('services.appointment_creator.count_error'))
+    @service_status_error.notice.push(I18n.t('services.appointment_creator.count_error'))
   end
 
   def already_booked
@@ -36,7 +33,7 @@ class AppointmentCreator < ApplicationService
   end
 
   def already_exist_error
-    ServiceStatus.new(false, I18n.t('services.appointment_creator.already_exist_error'))
+    @service_status_error.notice.push(I18n.t('services.appointment_creator.already_exist_error'))
   end
 
   def successful_save

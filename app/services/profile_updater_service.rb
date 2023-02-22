@@ -1,14 +1,8 @@
-class ProfileUpdater < ApplicationService
+class ProfileUpdaterService
   def initialize(user, params)
     @user = user
     @params = params
   end
-
-  def call
-    update
-  end
-
-  private
 
   def update
     return update_doctor if @user.instance_of?(::Doctor)
@@ -18,10 +12,12 @@ class ProfileUpdater < ApplicationService
   # Doctor
 
   def update_doctor
-    return error_search_doctor if search_doctor.nil?
-    return successful_update_doctor if check_update_doctor
+    @service_status_error = ServiceStatus.new(false, [])
+    error_search_doctor if search_doctor.nil?
+    return successful_update_doctor if check_update_doctor && @service_status_error.notice.empty?
 
-    ServiceStatus.new(false, I18n.t('services.doctor_updater.not_successful_update'))
+    @service_status_error.notice.push(I18n.t('services.doctor_updater.not_successful_update'))
+    @service_status_error
   end
 
   def search_doctor
@@ -38,16 +34,18 @@ class ProfileUpdater < ApplicationService
   end
 
   def error_search_doctor
-    ServiceStatus.new(false, I18n.t('services.doctor_updater.error_search_doctor'))
+    @service_status_error.notice.push(I18n.t('services.doctor_updater.error_search_doctor'))
   end
 
   # Patient
 
   def updater_patient
-    return error_search_patient if search_patient.nil?
-    return successful_update_patient if check_update_patient
+    @service_status_error = ServiceStatus.new(false, [])
+    error_search_patient if search_patient.nil?
+    return successful_update_patient if check_update_patient && @service_status_error.notice.empty?
 
-    ServiceStatus.new(false, I18n.t('services.patient_updater.not_successful_update'))
+    @service_status_error.notice.push(I18n.t('services.patient_updater.not_successful_update'))
+    @service_status_error
   end
 
   def search_patient
@@ -55,7 +53,7 @@ class ProfileUpdater < ApplicationService
   end
 
   def error_search_patient
-    ServiceStatus.new(false, I18n.t('services.patient_updater.error_search_patient'))
+    @service_status_error.notice.push(I18n.t('services.patient_updater.error_search_patient'))
   end
 
   def check_update_patient

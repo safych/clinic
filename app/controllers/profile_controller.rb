@@ -5,27 +5,19 @@ class ProfileController < ApplicationController
   def show; end
 
   def update
-    updating = ProfileUpdater.call(current_user, update_params)
+    @updating = ProfileUpdaterService.new(current_user, update_params).update
 
-    if updating.success?
-      redirect_to profile_path, notice: updating.notice
-    else
-      redirect_to profile_path, status: :unprocessable_entity, notice: updating.notice
-    end
+    update_notice
   end
 
   def update_photo
-    updating = ProfilePhotoUpdater.call(current_user, params[:avatar])
+    @updating = ProfilePhotoUpdaterService.new(current_user, params[:avatar]).update_photo
 
-    if updating.success?
-      redirect_to profile_path, notice: updating.notice
-    else
-      redirect_to profile_path, status: :unprocessable_entity, notice: updating.notice
-    end
+    update_notice
   end
 
   def update_password
-    updating = ProfilePasswordUpdater.call(current_user, params[:password], params[:password_confirmation])
+    updating = ProfilePasswordUpdaterService.new(current_user, update_password_params).update_password
 
     if updating.success?
       redirect_to new_patient_session_path, notice: updating.notice
@@ -34,7 +26,19 @@ class ProfileController < ApplicationController
     end
   end
 
+  def update_notice
+    if @updating.success?
+      redirect_to profile_path, notice: @updating.notice
+    else
+      redirect_to profile_path, status: :unprocessable_entity, notice: @updating.notice
+    end
+  end
+
   private
+
+  def update_password_params
+    params.permit(:password, :password_confirmation)
+  end
 
   def update_params
     params.permit(:name, :surname, :phone, :age, :gender, :residence, :category_id)

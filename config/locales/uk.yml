@@ -32,8 +32,7 @@ uk:
 
   appointment:
     index:
-      search_by_date: "Пошук за датою"
-      search_by_status: "Пошук за статусом"
+      search: "Пошук"
       new_appointment: "Новий запис до лікаря"
       photo: "Фото"
       doctor: "Лікар"
@@ -56,8 +55,7 @@ uk:
 
   doctor:
     index:
-      search_by_surname: "Пошук за прізвищем"
-      search_by_category: "Пошук за категорією"
+      search: "Пошук"
       photo: "Фото"
       name: "Ім'я"
       surname: "Прізвище"

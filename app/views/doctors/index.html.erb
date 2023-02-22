@@ -1,18 +1,14 @@
 <div style="margin-left: 1%">
   <p style="color: green"><%= notice %></p>
-  <h3><%= t('doctor.index.search_by_surname') %></h3>
+  <h3><%= t('doctor.index.search') %></h3>
   <%= form_with url: "/doctors/", method: :get do |f| %>
-    <%= f.label :search_surname, style: "display: block" %>
-    <%= f.text_field :search_surname %>
+    <%= f.label :surname, style: "display: block" %>
+    <%= f.text_field :surname %>
     <br>
-    <%= f.submit t('doctor.index.search_by_surname') %>
-  <% end %>
-  <h3><%= t('doctor.index.search_by_category') %></h3>
-  <%= form_with url: "/doctors/", method: :get do |f| %>
-    <%= f.label :search_category, style: "display: block" %>
-    <%= f.select(:search_category, Category.all.collect { |category| [category.title, category.id] }) %>
+    <%= f.label :category, style: "display: block" %>
+    <%= f.select(:category, Category.all.collect { |category| [category.title, category.id] }, { include_blank: true }) %>
     <br>
-    <%= f.submit t('doctor.index.search_by_category') %>
+    <%= f.submit t('doctor.index.search') %>
   <% end %>
   <h1><%= t('doctor.index.doctors') %></h1>
   <table class="table">

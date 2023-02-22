@@ -1,22 +1,17 @@
 <div style="margin-left: 1%">
   <p style="color: green"><%= notice %></p>
-  <h3><%= t('appointment.index.search_by_date') %></h3>
+  <h3><%= t('appointment.index.search') %></h3>
   <%= form_with url: "/appointments/", method: :get do |f| %>
     <%= f.label :search_date, style: "display: block" %>
-    <%= f.date_select :search_date %>
-    <%= f.hidden_field :date %>
+    <%= f.date_field :date %>
     <br>
-    <%= submit_tag t('appointment.index.search_by_date'), id: 'search_by_date' %>
-  <% end %>
-  <h3><%= t('appointment.index.search_by_status') %></h3>
-  <%= form_with url: "/appointments/", method: :get do |f| %>
-    <%= f.label :search_status, style: "display: block" %>
-    <%= radio_button_tag(:search_status, "wait") %>
+    <%= f.label :status, style: "display: block" %>
+    <%= radio_button_tag(:status, "wait") %>
       <%= label_tag(:status_wait, "Wait status") %>
-    <%= radio_button_tag(:search_status, "done") %>
+    <%= radio_button_tag(:status, "done") %>
       <%= label_tag(:status_done, "Done status") %>
     <br>
-    <%= submit_tag t('appointment.index.search_by_status') %>
+    <%= submit_tag t('appointment.index.search') %>
   <% end %>
   <% if can? :create, Appointment %>
     <%= link_to t('appointment.index.new_appointment'), new_appointment_path %>
@@ -78,4 +73,3 @@
   <% end %>
   <%= paginate @appointments %>
 </div>
-<%= javascript_include_tag( 'appointment' ) %>

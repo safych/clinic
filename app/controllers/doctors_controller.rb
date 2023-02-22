@@ -1,11 +1,11 @@
 class DoctorsController < ApplicationController
   def index
-    @doctors = DoctorsListQuery.new(list_params).list
+    @doctors = DoctorsListQuery.new(index_params).list
   end
 
   private
 
-  def list_params
-    params.permit(:search_category, :search_surname, :page)
+  def index_params
+    params.permit(:category, :surname, :page)
   end
 end

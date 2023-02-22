@@ -9,7 +9,7 @@
     <li><%= t('profile.patient.residence') %> <%= current_patient.residence %></li>
   </ul>
   <h2><%= t('profile.patient.change_password') %></h2>
-  <%= form_with url: "/update_password", method: :post do |f| %>
+  <%= form_with url: "/profile/update_password", method: :post do |f| %>
     <div class="field">
       <%= f.label :password, t('profile.patient.new_password') %><br />
       <%= f.password_field :password %>
@@ -25,7 +25,7 @@
     </div>
   <% end %>
   <h2><%= t('profile.patient.change_data') %></h2>
-  <%= form_with url: "/update", method: :post do |f| %>
+  <%= form_with url: "/profile.#{current_patient.id}", method: :put do |f| %>
     <div class="field">
       <%= f.label :phone, t('profile.patient.edit_phone') %><br />
       <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", placeholder: "+380*********", value: current_patient.phone %>

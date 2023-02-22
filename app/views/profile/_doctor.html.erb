@@ -7,7 +7,7 @@
     <li><%= t('profile.doctor.category') %> <%= current_doctor.category.title %></li>
   </ul>
   <h2><%= t('profile.doctor.change_password') %></h2>
-  <%= form_with url: "/update_password", method: :post do |f| %>
+  <%= form_with url: "/profile/update_password", method: :post do |f| %>
     <div class="field">
       <%= f.label :password, t('profile.doctor.new_password') %><br />
       <%= f.password_field :password %>
@@ -23,7 +23,7 @@
     </div>
   <% end %>
   <h2><%= t('profile.doctor.change_data') %></h2>
-  <%= form_with url: "/update", method: :post do |f| %>
+  <%= form_with url: "/profile.#{current_doctor.id}", method: :put do |f| %>
     <div class="field">
       <%= f.label :category_id, t('profile.doctor.edit_category') %><br />
       <%= f.select(:category_id, Category.all.collect { |category| [category.title, category.id] }, selected: current_doctor.category_id) %>
@@ -50,7 +50,7 @@
   <% end %>
   <h2><%= t('profile.doctor.change_photo') %></h2>
   <p><%= t('profile.doctor.message_photo') %></p>
-  <%= form_with url: "/update_photo", method: :post do |f| %>
+  <%= form_with url: "/profile/update_photo", method: :post do |f| %>
     <div>
       <%= f.label :avatar, t('profile.doctor.avatar') %><br />
       <%= f.file_field :avatar, direct_upload: true %>

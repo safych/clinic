@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AppointmentCreator do
+RSpec.describe AppointmentCreatorService do
   describe 'Checking an appointment with a doctor when 11 people are already registered for that day' do
     before :each do
       create(:category)
@@ -33,9 +33,9 @@ RSpec.describe AppointmentCreator do
     it 'Return count error' do
       new_appointment = Appointment.new(doctor_id: '1', patient_id: '1', status: 'wait', recommendation: nil,
                                         date: '2023-01-15')
-      result = AppointmentCreator.call(new_appointment)
+      result = AppointmentCreatorService.new(new_appointment).create_appointment
       expect(result.status).to eq false
-      expect(result.notice).to eq 'The doctor has no more places for today'
+      expect(result.notice).to include('The doctor has no more places for today')
     end
   end
 
@@ -50,9 +50,9 @@ RSpec.describe AppointmentCreator do
     it 'Return already exist error' do
       new_appointment = Appointment.new(doctor_id: '1', patient_id: '1', status: 'wait', recommendation: nil,
                                         date: '2022-12-12')
-      result = AppointmentCreator.call(new_appointment)
+      result = AppointmentCreatorService.new(new_appointment).create_appointment
       expect(result.status).to eq false
-      expect(result.notice).to eq 'You are currently registered with this doctor'
+      expect(result.notice).to include('You are currently registered with this doctor')
     end
   end
 
@@ -67,7 +67,7 @@ RSpec.describe AppointmentCreator do
     it 'Return successful save' do
       new_appointment = Appointment.new(id: '2', doctor_id: '1', patient_id: '1', status: 'wait', recommendation: nil,
                                         date: '2023-01-15')
-      result = AppointmentCreator.call(new_appointment)
+      result = AppointmentCreatorService.new(new_appointment).create_appointment
       expect(result.status).to eq true
     end
   end

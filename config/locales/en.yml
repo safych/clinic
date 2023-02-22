@@ -31,8 +31,7 @@ en:
 
   appointment:
     index:
-      search_by_date: "Search by date"
-      search_by_status: "Search by status"
+      search: "Search"
       new_appointment: "New appointment"
       photo: "Photo"
       doctor: "Doctor"
@@ -55,8 +54,7 @@ en:
 
   doctor:
     index:
-      search_by_surname: "Search by surname"
-      search_by_category: "Search by category"
+      search: "Search"
       photo: "Photo"
       name: "Name"
       surname: "Surname"
